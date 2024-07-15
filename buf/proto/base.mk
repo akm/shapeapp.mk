@@ -4,11 +4,15 @@
 .PHONY: setup
 setup: buf.yaml
 
-buf.yaml: $(BUF_CLI)
-	$(BUF_CLI) mod init
+BUF_YAML=buf.yaml
+$(BUF_YAML):
+	$(BUF_CLI) config init
+.PHONY: buf_yaml_gen
+buf_yaml_gen: $(BUF_CLI)
+	$(BUF_CLI) config init
 
 .PHONY: generate
-generate: buf.yaml $(BUF_CLI)
+generate: $(BUF_YAML) $(BUF_CLI)
 	$(BUF_CLI) generate
 
 PROTOSET_BIN=protoset.bin
@@ -19,5 +23,5 @@ protoset_path:
 	@echo $(PROTOSET_BIN)
 
 .PHONY: build
-build: buf.yaml $(BUF_CLI)
+build: $(BUF_CLI) $(BUF_YAML)
 	$(BUF_CLI) build -o $(PROTOSET_BIN)
