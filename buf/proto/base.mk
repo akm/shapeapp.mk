@@ -1,27 +1,27 @@
 # Requires:
 # include $(PATH_TO_SHAPEAPPMK)/buf/buf.mk
 
-.PHONY: setup
-setup: buf.yaml
-
 BUF_YAML=buf.yaml
 $(BUF_YAML):
-	$(BUF_CLI) config init
-.PHONY: buf_yaml_gen
-buf_yaml_gen: $(BUF_CLI)
+	$(MAKE) buf-yaml-gen
+.PHONY: buf-yaml-gen
+buf-yaml-gen: $(BUF_CLI)
 	$(BUF_CLI) config init
 
-.PHONY: generate
-generate: $(BUF_YAML) $(BUF_CLI)
+.PHONY: buf-setup
+buf-setup: $(BUF_YAML)
+
+.PHONY: buf-generate
+buf-generate: $(BUF_YAML) $(BUF_CLI)
 	$(BUF_CLI) generate
 
-PROTOSET_BIN=protoset.bin
-$(PROTOSET_BIN): build
+BUF_PROTOSET_BIN?=protoset.bin
+$(BUF_PROTOSET_BIN): build
 
-.PHONY: protoset_path
-protoset_path:
-	@echo $(PROTOSET_BIN)
+.PHONY: buf-protoset-path
+buf-protoset-path:
+	@echo $(BUF_PROTOSET_BIN)
 
-.PHONY: build
-build: $(BUF_CLI) $(BUF_YAML)
-	$(BUF_CLI) build -o $(PROTOSET_BIN)
+.PHONY: buf-build
+buf-build: $(BUF_CLI) $(BUF_YAML)
+	$(BUF_CLI) build -o $(BUF_PROTOSET_BIN)
