@@ -15,6 +15,10 @@ buf-setup: $(BUF_YAML)
 buf-generate: $(BUF_YAML) $(BUF_CLI)
 	$(BUF_CLI) generate
 
+.PHONY: buf-lint
+buf-lint: $(BUF_CLI)
+	$(BUF_CLI) lint
+
 BUF_PROTOSET_BIN?=protoset.bin
 $(BUF_PROTOSET_BIN): build
 
