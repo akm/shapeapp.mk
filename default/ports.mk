@@ -23,18 +23,18 @@ APP_PORT_FIREBASE_AUTH_e2e_test?=9090
 APP_PORT_FIREBASE_AUTH_unit_test?=9091
 APP_PORT_FIREBASE_EMULATOR_SUITE_dev?=4000
 
-.PHONY: default-port-envs
-default-port-envs:
-	@echo "APP_PORT_RPROXY_dev=$(APP_PORT_RPROXY_dev)"
-	@echo "APP_PORT_RPROXY_e2e_test=$(APP_PORT_RPROXY_e2e_test)"
-	@echo "APP_PORT_APISVR_dev=$(APP_PORT_APISVR_dev)"
-	@echo "APP_PORT_APISVR_e2e_test=$(APP_PORT_APISVR_e2e_test)"
-	@echo "APP_PORT_UISVR_dev=$(APP_PORT_UISVR_dev)"
-	@echo "APP_PORT_UISVR_e2e_test=$(APP_PORT_UISVR_e2e_test)"
-	@echo "APP_PORT_MYSQL_dev=$(APP_PORT_MYSQL_dev)"
-	@echo "APP_PORT_MYSQL_e2e_test=$(APP_PORT_MYSQL_e2e_test)"
-	@echo "APP_PORT_MYSQL_unit_test=$(APP_PORT_MYSQL_unit_test)"
-	@echo "APP_PORT_FIREBASE_AUTH_dev=$(APP_PORT_FIREBASE_AUTH_dev)"
-	@echo "APP_PORT_FIREBASE_AUTH_e2e_test=$(APP_PORT_FIREBASE_AUTH_e2e_test)"
-	@echo "APP_PORT_FIREBASE_AUTH_unit_test=$(APP_PORT_FIREBASE_AUTH_unit_test)"
-	@echo "APP_PORT_FIREBASE_EMULATOR_SUITE_dev=$(APP_PORT_FIREBASE_EMULATOR_SUITE_dev)"
+DEFAULT_PORT_VARS=\
+	APP_PORT_RPROXY_dev \
+	APP_PORT_RPROXY_e2e_test \
+	APP_PORT_APISVR_dev \
+	APP_PORT_APISVR_e2e_test \
+	APP_PORT_UISVR_dev \
+	APP_PORT_UISVR_e2e_test \
+	APP_PORT_MYSQL_dev \
+	APP_PORT_MYSQL_e2e_test \
+	APP_PORT_MYSQL_unit_test \
+	APP_PORT_FIREBASE_AUTH_dev \
+	APP_PORT_FIREBASE_AUTH_e2e_test \
+	APP_PORT_FIREBASE_AUTH_unit_test \
+	APP_PORT_FIREBASE_EMULATOR_SUITE_dev
+DEFAULT_PORT_ENVS=$(foreach var,$(DEFAULT_PORT_VARS),$(var)=$($(var)))
