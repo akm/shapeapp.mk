@@ -16,3 +16,15 @@ endif
 .PHONY: new-go
 new-go:
 	GOOSE_MIGRATION_NAME=$(NEW_ARGS) $(MAKE) goose-create-go
+
+.PHONY: up
+up: goose-up
+
+.PHONY: down
+down: goose-down
+
+.PHONY: state
+state: goose-state
+
+.PHONY: reset
+reset: goose-reset
