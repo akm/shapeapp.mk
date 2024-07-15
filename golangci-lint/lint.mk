@@ -5,6 +5,6 @@ $(GOLANGCLI_LINT_CLI):
 	CLI_MODULE=github.com/golangci/golangci-lint/cmd/golangci-lint \
 	$(MAKE) -C $(PATH_TO_SHAPEAPPMK)/golang/tool cli-install
 
-.PHONY: lint
-lint: $(GOLANGCLI_LINT_CLI)
+.PHONY: golangci-lint-lint
+golangci-lint-lint: $(GOLANGCLI_LINT_CLI)
 	$(GOLANGCLI_LINT_CLI) run ./...
