@@ -1,5 +1,5 @@
-.PHONY: asdf_reshim
-asdf_reshim:
+.PHONY: asdf-reshim
+asdf-reshim:
 ifdef GITHUB_ACTION
 	@echo "SKIP asdf reshim"
 else
