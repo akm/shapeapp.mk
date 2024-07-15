@@ -1,3 +1,3 @@
-.PHONY: build
-build:
+.PHONY: golang-build
+golang-build:
 	go build ./...
