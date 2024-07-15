@@ -17,9 +17,9 @@ goose-down:
 	$(GOOSE_COMMAND) down
 
 .PHONY: goose-state
-goose-state: 
+goose-state:
 	$(GOOSE_COMMAND) status
 
 .PHONY: goose-reset
-goose-reset: 
+goose-reset:
 	$(GOOSE_COMMAND) reset
