@@ -3,11 +3,15 @@
 
 PATH_TO_NODE_MODULES=node_modules
 $(PATH_TO_NODE_MODULES):
-	$(MAKE) install
+	$(MAKE) npm-ci
 
-.PHONY: install
-install:
+.PHONY: npm-install
+npm-install:
 	npm install
+
+.PHONY: npm-ci
+npm-ci:
+	npm ci
 
 .PHONY: dev_container_up
 dev_container_up:
