@@ -1,23 +1,25 @@
+GOOSE_COMMAND=$(GOOSE_ENVS) go run $(GOOSE_MAIN_PACKAGE) '$(GOOSE_DSN)'
+
 .PHONY: goose-create
 goose-create:
-	go run $(GOOSE_MAIN_PACKAGE) '$(GOOSE_DSN)' create $(GOOSE_MIGRATION_NAME) sql
+	$(GOOSE_COMMAND) create $(GOOSE_MIGRATION_NAME) sql
 
 .PHONY: goose-create-go
 goose-create-go:
-	go run $(GOOSE_MAIN_PACKAGE) '$(GOOSE_DSN)' create $(GOOSE_MIGRATION_NAME) go
+	$(GOOSE_COMMAND) create $(GOOSE_MIGRATION_NAME) go
 
 .PHONY: goose-up
 goose-up:
-	go run $(GOOSE_MAIN_PACKAGE) '$(GOOSE_DSN)' up
+	$(GOOSE_COMMAND) up
 
 .PHONY: goose-down
 goose-down:
-	go run $(GOOSE_MAIN_PACKAGE) '$(GOOSE_DSN)' down
+	$(GOOSE_COMMAND) down
 
 .PHONY: goose-state
 goose-state: 
-	go run $(GOOSE_MAIN_PACKAGE) '$(GOOSE_DSN)' status
+	$(GOOSE_COMMAND) status
 
 .PHONY: goose-reset
 goose-reset: 
-	go run $(GOOSE_MAIN_PACKAGE) '$(GOOSE_DSN)' reset
+	$(GOOSE_COMMAND) reset
