@@ -9,12 +9,16 @@ dsn:
 console:
 	mysql $(MYSQL_CLI_OPTS) $(MYSQL_DB_NAME)
 
-WAIT_INITIAL_SECONDS?=1
+WAIT_DELAY_SECONDS?=1
 WAIT_RETRY_TIMES?=3
 
 .PHONY: wait
 wait:
-	sleep $(WAIT_INITIAL_SECONDS) && mysqladmin -u root -h 127.0.0.1 --wait --count $(WAIT_RETRY_TIMES) ping || exit 1
+	mysqladmin -u root -h 127.0.0.1 --wait --count $(WAIT_RETRY_TIMES) ping || exit 1
+
+.PHONY: wait-with-delay
+wait-with-delay:
+	sleep $(WAIT_DELAY_SECONDS) && $(MAKE) wait
 
 
 # MYSQLDUMP_OPTS?=--no-data
