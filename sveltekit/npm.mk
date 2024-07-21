@@ -1,5 +1,4 @@
 # Requires:
-# - PATH_TO_LOCAL_DEV?=...
 
 PATH_TO_NODE_MODULES=node_modules
 $(PATH_TO_NODE_MODULES):
