@@ -29,3 +29,7 @@ buf-protoset-path:
 .PHONY: buf-build
 buf-build: $(BUF_CLI) $(BUF_YAML)
 	$(BUF_CLI) build -o $(BUF_PROTOSET_BIN)
+
+.PHONY: buf-mod-update
+buf-mod-update: $(BUF_CLI) $(BUF_YAML)
+	$(BUF_CLI) mod update
