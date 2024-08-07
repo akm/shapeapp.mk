@@ -39,8 +39,8 @@ $(GOLANG_BINARY_OUTPUT_FOR_local):
 	$(MAKE) golang-binary-local
 .PHONY: golang-binary-local
 golang-binary-local: golang-binary-$(GOLANG_BINARY_GOOS_FOR_local)-$(LOCAL_GOARCH)
-.PHONY: golang-binary-file-for-local
-golang-binary-file-for-local:
+.PHONY: golang-binary-path-for-stage-local
+golang-binary-path-for-stage-local:
 	@echo "$(GOLANG_BINARY_OUTPUT_FOR_local)"
 
 GOLANG_BINARY_OUTPUT_FOR_production=$(GOLANG_BINARY_OUTPUT_$(GOLANG_BINARY_GOOS_FOR_production)_$(GOLANG_BINARY_GOARCH_FOR_production))
