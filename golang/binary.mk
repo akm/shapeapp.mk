@@ -45,9 +45,10 @@ golang-binary-path-for-stage-local:
 
 GOLANG_BINARY_PATH_FOR_STAGE_production=$(GOLANG_BINARY_OUTPUT_$(GOLANG_BINARY_GOOS_FOR_production)_$(GOLANG_BINARY_GOARCH_FOR_production))
 $(GOLANG_BINARY_PATH_FOR_STAGE_production):
-	$(MAKE) golang-binary-production
-.PHONY: golang-binary-production
-golang-binary-production: golang-binary-$(GOLANG_BINARY_GOOS_FOR_production)-$(GOLANG_BINARY_GOARCH_FOR_production)
+	$(MAKE) golang-binary-build-for-stage-production
+.PHONY: golang-binary-build-for-stage-production
+golang-binary-build-for-stage-production: golang-binary-$(GOLANG_BINARY_GOOS_FOR_production)-$(GOLANG_BINARY_GOARCH_FOR_production)
+
 .PHONY: golang-binary-path-for-stage-production
 golang-binary-path-for-stage-production:
 	@echo "$(GOLANG_BINARY_PATH_FOR_STAGE_production)"
