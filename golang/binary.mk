@@ -48,6 +48,6 @@ $(GOLANG_BINARY_OUTPUT_FOR_production):
 	$(MAKE) golang-binary-production
 .PHONY: golang-binary-production
 golang-binary-production: golang-binary-$(GOLANG_BINARY_GOOS_FOR_production)-$(GOLANG_BINARY_GOARCH_FOR_production)
-.PHONY: golang-binary-file-for-production
-golang-binary-file-for-production:
+.PHONY: golang-binary-path-for-stage-production
+golang-binary-path-for-stage-production:
 	@echo "$(GOLANG_BINARY_OUTPUT_FOR_production)"
