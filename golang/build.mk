@@ -1,5 +1,5 @@
-.PHONY: golang-build
-golang-build:
+.PHONY: golang-build-all
+golang-build-all:
 	go build ./...
 
 LOCAL_GOOS?=$(shell go run $(PATH_TO_SHAPEAPPMK)/golang/goos.go)
