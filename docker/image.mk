@@ -1,6 +1,6 @@
 # Requires:
 # - DOCKER_IMAGE_REPOSITORY
-# - DOCKER_IMAGE_TAG
+# - DOCKER_IMAGE_NAME
 #
 # Options:
 # - DOCKER_IMAGE_BUILD_DEPS
@@ -16,6 +16,6 @@ docker-image-name:
 .PHONY: docker-image-build
 docker-image-build: $(DOCKER_IMAGE_BUILD_DEPS)
 	docker build \
-		-t $(DOCKER_IMAGE_TAG) \
+		-t $(DOCKER_IMAGE_NAME) \
 		$(DOCKER_IMAGE_BUILD_OPTS) \
 		.
