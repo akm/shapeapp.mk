@@ -52,3 +52,13 @@ golang-binary-build-for-stage-production: golang-binary-$(GOLANG_BINARY_GOOS_FOR
 .PHONY: golang-binary-path-for-stage-production
 golang-binary-path-for-stage-production:
 	@echo "$(GOLANG_BINARY_PATH_FOR_STAGE_production)"
+
+GOLANG_BINARY_PATH_FOR_STAGE_dev=$(GOLANG_BINARY_OUTPUT_$(LOCAL_GOOS)_$(LOCAL_GOARCH))
+$(GOLANG_BINARY_PATH_FOR_STAGE_dev):
+	$(MAKE) golang-binary-build-for-stage-dev
+.PHONY: golang-binary-build-for-stage-dev
+golang-binary-build-for-stage-dev: golang-binary-$(LOCAL_GOOS)-$(LOCAL_GOARCH)
+
+.PHONY: golang-binary-path-for-stage-dev
+golang-binary-path-for-stage-dev:
+	@echo "$(GOLANG_BINARY_PATH_FOR_STAGE_dev)"
