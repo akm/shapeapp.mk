@@ -19,6 +19,12 @@ golang-binary-linux-arm64:
 	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 \
 		go build -o $(GOLANG_BINARY_OUTPUT_linux_arm64) $(GOLANG_BINARY_TARGET)
 
+GOLANG_BINARY_OUTPUT_darwin_amd64=$(GOLANG_BINARY_OUTPUT_BASE)-darwin-amd64
+.PHONY: golang-binary-darwin-amd64
+golang-binary-darwin-amd64:
+	CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 \
+		go build -o $(GOLANG_BINARY_OUTPUT_darwin_amd64) $(GOLANG_BINARY_TARGET)
+
 GOLANG_BINARY_OUTPUT_darwin_arm64=$(GOLANG_BINARY_OUTPUT_BASE)-darwin-arm64
 .PHONY: golang-binary-darwin-arm64
 golang-binary-darwin-arm64:
