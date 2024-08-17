@@ -18,11 +18,12 @@
 # - staging2
 # - local
 # - github
+# - dev
 
 ifeq ($(GITHUB_ACTIONS),true)
 APP_STAGE_TYPE?=github
 else
-APP_STAGE_TYPE?=local
+APP_STAGE_TYPE?=dev
 endif
 
 # local, github では STAGE は APP_STAGE_TYPE と同一です。デプロイ対象である production や
