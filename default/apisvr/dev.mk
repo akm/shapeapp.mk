@@ -1,6 +1,6 @@
 # Requires:
 #   - PATH_TO_DEV_CONTAINERS
-#   - PATH_TO_DEV_RUN_PACKAGE
+#   - APISVR_DEV_TARGET_PACKAGE
 #
 # Options:
 #   - DEV_TARGET
@@ -18,4 +18,4 @@ dev-containers-down:
 
 .PHONY: dev-run
 dev-run:
-	$(DEV_ENVS) go run $(PATH_TO_DEV_RUN_PACKAGE)
+	$(DEV_ENVS) go run $(APISVR_DEV_TARGET_PACKAGE)
