@@ -1,8 +1,9 @@
 # Required variables:
-#   - APISVR_DEV_PATH_TO_CONTAINERS
-#   - APISVR_DEV_TARGET_PACKAGE
+#   - PATH_TO_ROOT
 #
 # Optional variables:
+#   - APISVR_DEV_PATH_TO_CONTAINERS
+#   - APISVR_DEV_TARGET_PACKAGE
 #   - APISVR_ENV_VARS
 #   - APISVR_ENVS_BASE
 #
@@ -19,6 +20,9 @@
 #   - dev
 
 DEV_TARGET?=apisvr
+
+APISVR_DEV_TARGET_PACKAGE?=./cmd/server
+APISVR_DEV_PATH_TO_CONTAINERS?=$(PATH_TO_ROOT)/stages/local
 
 # DEV_CONTAINERS-mysql-dsn
 $(call shell-dir-target-vars,DEV_CONTAINERS-,$(APISVR_DEV_PATH_TO_CONTAINERS),mysql-dsn)
