@@ -2,14 +2,16 @@
 # GOLANG_BINARY_TARGET: ex. ./cmd/server
 #
 # Optional variables:
+# GOLANG_BINARY_TARGET: default ./cmd/server
 # GOLANG_BINARY_OUTPUT_DIR: default ./bin
 # GOLANG_BINARY_OUTPUT_BASE: default ./bin/server
 # GOLANG_BINARY_GOOS_FOR_local: default linux
 # GOLANG_BINARY_GOOS_FOR_production: default linux
 # GOLANG_BINARY_GOARCH_FOR_production: default amd64
 
+GOLANG_BINARY_TARGET?=./cmd/server
 GOLANG_BINARY_OUTPUT_DIR?=./bin
-GOLANG_BINARY_OUTPUT_BASE=$(GOLANG_BINARY_OUTPUT_DIR)/$(notdir $(GOLANG_BINARY_TARGET))
+GOLANG_BINARY_OUTPUT_BASE?=$(GOLANG_BINARY_OUTPUT_DIR)/$(notdir $(GOLANG_BINARY_TARGET))
 
 GOLANG_BINARY_OUTPUT_linux_amd64=$(GOLANG_BINARY_OUTPUT_BASE)-linux-amd64
 .PHONY: golang-binary-linux-amd64
