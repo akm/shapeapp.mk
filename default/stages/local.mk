@@ -61,8 +61,8 @@ uisvr-%:
 
 SETUP_DEPS_FOR_DEV_apisvr=
 SETUP_DEPS_FOR_DEV_uisvr=apisvr-golang-binary-build-for-stage-local
-SETUP_DEPS_FOR_DEV_rproxy=$(APP_UISVR_DOT_ENV_PATH) uisvr-setup
-SETUP_DEPS_FOR_DEV_all=$(APP_RPROXY_ENVOY_YAML)
+SETUP_DEPS_FOR_DEV_rproxy=$(SETUP_DEPS_FOR_DEV_uisvr) uisvr-setup
+SETUP_DEPS_FOR_DEV_all=$(SETUP_DEPS_FOR_DEV_rproxy)
 SETUP_DEPS=$(SETUP_DEPS_FOR_DEV_$(DEV_TARGET))
 
 .PHONY: setup
@@ -76,8 +76,12 @@ up: setup docker-compose-up
 down: docker-compose-down
 .PHONY: rmi
 rmi: docker-compose-rmi
+.PHONY: build
+build: setup docker-compose-build
 .PHONY: rebuild
-rebuild: docker-compose-rebuild
+rebuild: 
+	$(MAKE) rmi || true
+	$(MAKE) build
 
 MYSQL_HOST=$(shell [ "$(DEV_TARGET)" = "apisvr" ] && echo "127.0.0.1" || echo "mysql")
 
