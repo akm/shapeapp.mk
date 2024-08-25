@@ -1,4 +1,9 @@
-# Requires:
+# Optional variables:
+# - NPM_RUN_BUILD_DEPS
+# - NPM_RUN_DEV_DEPS
+# - NPM_RUN_PREVIEW_DEPS
+# - NPM_RUN_TEST_DEPS
+# - NPM_RUN_LINT_DEPS
 
 PATH_TO_NODE_MODULES=node_modules
 $(PATH_TO_NODE_MODULES):
@@ -16,6 +21,10 @@ npm-ci:
 .PHONY: npm-run-build
 npm-run-build: $(PATH_TO_NODE_MODULES) $(NPM_RUN_BUILD_DEPS)
 	npm run build
+
+.PHONY: npm-run-dev
+npm-run-dev: $(PATH_TO_NODE_MODULES) $(NPM_RUN_DEV_DEPS)
+	npm run dev
 
 .PHONY: npm-run-preview
 npm-run-preview: $(PATH_TO_NODE_MODULES) $(NPM_RUN_PREVIEW_DEPS)
