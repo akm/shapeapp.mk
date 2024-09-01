@@ -10,6 +10,9 @@ mysql-dsn:
 
 .PHONY: mysql-wait
 mysql-wait:
+ifdef GITHUB_ACTION
+	sleep 10
+endif
 	$(MYSQL_ENVS) $(MAKE) -C $(PATH_TO_SHAPEAPPMK)/mysql wait
 
 .PHONY: mysql-console
