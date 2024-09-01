@@ -1,3 +1,4 @@
+include $(PATH_TO_SHAPEAPPMK)/git/check.mk
 include $(PATH_TO_SHAPEAPPMK)/buf/buf.mk
 include $(PATH_TO_SHAPEAPPMK)/buf/proto/base.mk
 include $(PATH_TO_SHAPEAPPMK)/protobuf/protoc-gen-go.mk
