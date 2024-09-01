@@ -30,6 +30,7 @@ dev-run: setup .env npm-run-dev
 .PHONY: dev
 dev: dev-containers-up dev-run
 
+include $(PATH_TO_SHAPEAPPMK)/git/check.mk
 include $(PATH_TO_SHAPEAPPMK)/sveltekit/npm.mk
 include $(PATH_TO_SHAPEAPPMK)/sveltekit/app.mk
 
