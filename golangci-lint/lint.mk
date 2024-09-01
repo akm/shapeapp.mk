@@ -1,9 +1,8 @@
 GOLANGCLI_LINT_CLI_VERSION?=latest
-GOLANGCLI_LINT_CLI=$(shell go env GOPATH)/bin/golangci-lint
+GOLANGCLI_LINT_CLI_MODULE=github.com/golangci/golangci-lint/cmd/golangci-lint
+GOLANGCLI_LINT_CLI=$(call golang-tool-bin-path,$(GOLANGCLI_LINT_CLI_MODULE))
 $(GOLANGCLI_LINT_CLI):
-	CLI_VERSION=$(GOLANGCLI_LINT_CLI_VERSION) \
-	CLI_MODULE=github.com/golangci/golangci-lint/cmd/golangci-lint \
-	$(MAKE) -C $(PATH_TO_SHAPEAPPMK)/golang/tool cli-install
+	$(call golang-tool-cli-install-with-prefix,GOLANGCLI_LINT)
 
 .PHONY: golangci-lint-lint
 golangci-lint-lint: $(GOLANGCLI_LINT_CLI)
