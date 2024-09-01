@@ -30,6 +30,7 @@ dev-run: setup .env npm-run-dev
 .PHONY: dev
 dev: dev-containers-up dev-run
 
+include $(PATH_TO_SHAPEAPPMK)/git/check.mk
 include $(PATH_TO_SHAPEAPPMK)/sveltekit/npm.mk
 include $(PATH_TO_SHAPEAPPMK)/sveltekit/app.mk
 
@@ -38,7 +39,7 @@ CONNECT_WEB_PATH_TO_PROTO=$(PATH_TO_APISVR)/proto
 include $(PATH_TO_SHAPEAPPMK)/connect-web/generate.mk
 
 .PHONY: generate
-generate: connect-web-generate
+generate: connect-web-generate npm-run-format
 
 DOCKER_IMAGE_REPOSITORY?=$(APP_BASE_NAME)-uisvr
 DOCKER_IMAGE_NAME?=$(DOCKER_IMAGE_REPOSITORY):$(APP_STAGE_TYPE)

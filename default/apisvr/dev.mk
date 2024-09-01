@@ -29,6 +29,8 @@ $(call shell-dir-target-vars,DEV_CONTAINERS-,$(APISVR_DEV_PATH_TO_CONTAINERS),my
 
 APISVR_DEV_VARS?=$(APISVR_ENV_VARS)
 APISVR_DEV_ENVS?=$(APISVR_ENVS_BASE) \
+	LOG_LEVEL=debug \
+	LOG_FORMAT=text \
 	DB_DSN='$(DEV_CONTAINERS-mysql-dsn)' \
 	$(foreach var,$(APISVR_DEV_VARS),$(var)=$($(var)))
 

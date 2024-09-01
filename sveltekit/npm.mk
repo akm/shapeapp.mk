@@ -37,3 +37,7 @@ npm-run-test: $(PATH_TO_NODE_MODULES) $(NPM_RUN_TEST_DEPS)
 .PHONY: npm-run-lint
 npm-run-lint: $(PATH_TO_NODE_MODULES) $(NPM_RUN_LINT_DEPS)
 	npm run lint
+
+.PHONY: npm-run-format
+npm-run-format: $(PATH_TO_NODE_MODULES) $(NPM_RUN_FORMAT_DEPS)
+	npm run format

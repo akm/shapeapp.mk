@@ -2,11 +2,10 @@
 # include $(PATH_TO_SHAPEAPPMK)/text-template-cli/base.mk
 
 SQLC_CLI_VERSION?=latest
-SQLC_CLI?=$(shell go env GOPATH)/bin/sqlc
+SQLC_CLI_MODULE=github.com/sqlc-dev/sqlc/cmd/sqlc
+SQLC_CLI?=$(call golang-tool-bin-path,$(SQLC_CLI_MODULE))
 $(SQLC_CLI):
-	CLI_VERSION=$(SQLC_CLI_VERSION) \
-	CLI_MODULE=github.com/sqlc-dev/sqlc/cmd/sqlc \
-	$(MAKE) -C $(PATH_TO_SHAPEAPPMK)/golang/tool cli-install
+	$(call golang-tool-cli-install-with-prefix,SQLC)
 
 SQLC_YAML_TEMPLATE=sqlc.yaml.tmpl
 SQLC_YAML=sqlc.yaml

@@ -16,11 +16,11 @@ buf-generate: $(BUF_YAML) $(BUF_CLI)
 	$(BUF_CLI) generate
 
 .PHONY: buf-lint
-buf-lint: $(BUF_CLI)
+buf-lint: $(BUF_CLI) 
 	$(BUF_CLI) lint
 
 BUF_PROTOSET_BIN?=protoset.bin
-$(BUF_PROTOSET_BIN): build
+$(BUF_PROTOSET_BIN): buf-build
 
 .PHONY: buf-protoset-path
 buf-protoset-path:
@@ -33,3 +33,7 @@ buf-build: $(BUF_CLI) $(BUF_YAML)
 .PHONY: buf-mod-update
 buf-mod-update: $(BUF_CLI) $(BUF_YAML)
 	$(BUF_CLI) mod update
+
+.PHONY: buf-dep-update
+buf-dep-update: $(BUF_CLI) $(BUF_YAML)
+	$(BUF_CLI) dep update
