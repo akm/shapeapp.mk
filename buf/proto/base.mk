@@ -20,7 +20,7 @@ buf-lint: $(BUF_CLI)
 	$(BUF_CLI) lint
 
 BUF_PROTOSET_BIN?=protoset.bin
-$(BUF_PROTOSET_BIN): build
+$(BUF_PROTOSET_BIN): buf-build
 
 .PHONY: buf-protoset-path
 buf-protoset-path:
