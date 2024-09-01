@@ -57,7 +57,8 @@ $(call shell-dir-target-vars,TEST_CONTAINERS-,$(DBMIGRATIONS_TEST_PATH_TO_CONTAI
 
 .PHONY: test-containers-up
 test-containers-up:
-	$(MAKE) -C $(DBMIGRATIONS_TEST_PATH_TO_CONTAINERS) up
+	DOCKER_COMPOSE_TARGET_SERVICES=mysql \
+		$(MAKE) -C $(DBMIGRATIONS_TEST_PATH_TO_CONTAINERS) up
 
 .PHONY: test-containers-down
 test-containers-down:
