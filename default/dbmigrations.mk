@@ -74,4 +74,4 @@ test-run:
 test: test-containers-down test-containers-up test-run
 
 .PHONY: ci-test
-ci-test: test-containers-up
+ci-test: test-containers-up test-run
