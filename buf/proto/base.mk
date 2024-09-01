@@ -33,3 +33,7 @@ buf-build: $(BUF_CLI) $(BUF_YAML)
 .PHONY: buf-mod-update
 buf-mod-update: $(BUF_CLI) $(BUF_YAML)
 	$(BUF_CLI) mod update
+
+.PHONY: buf-dep-update
+buf-dep-update: $(BUF_CLI) $(BUF_YAML)
+	$(BUF_CLI) dep update
