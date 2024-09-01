@@ -16,7 +16,7 @@ buf-generate: $(BUF_YAML) $(BUF_CLI) $(PROTOC_GEN_CONNECT_GO_CLI)
 	$(BUF_CLI) generate
 
 .PHONY: buf-lint
-buf-lint: $(BUF_CLI)
+buf-lint: $(BUF_CLI) 
 	$(BUF_CLI) lint
 
 BUF_PROTOSET_BIN?=protoset.bin
@@ -27,7 +27,7 @@ buf-protoset-path:
 	@echo $(BUF_PROTOSET_BIN)
 
 .PHONY: buf-build
-buf-build: $(BUF_CLI) $(BUF_YAML)
+buf-build: $(BUF_CLI) $(BUF_YAML) $(PROTOC_GEN_CONNECT_GO_CLI)
 	$(BUF_CLI) build -o $(BUF_PROTOSET_BIN)
 
 .PHONY: buf-mod-update
