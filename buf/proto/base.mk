@@ -12,7 +12,7 @@ buf-yaml-gen: $(BUF_CLI)
 buf-setup: $(BUF_YAML)
 
 .PHONY: buf-generate
-buf-generate: $(BUF_YAML) $(BUF_CLI)
+buf-generate: $(BUF_YAML) $(BUF_CLI) $(PROTOC_GEN_CONNECT_GO_CLI)
 	$(BUF_CLI) generate
 
 .PHONY: buf-lint
