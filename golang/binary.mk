@@ -13,29 +13,17 @@ GOLANG_BINARY_TARGET?=./cmd/server
 GOLANG_BINARY_OUTPUT_DIR?=./bin
 GOLANG_BINARY_OUTPUT_BASE?=$(GOLANG_BINARY_OUTPUT_DIR)/$(notdir $(GOLANG_BINARY_TARGET))
 
-GOLANG_BINARY_OUTPUT_linux_amd64=$(GOLANG_BINARY_OUTPUT_BASE)-linux-amd64
-.PHONY: golang-binary-linux-amd64
-golang-binary-linux-amd64:
-	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
-		go build -o $(GOLANG_BINARY_OUTPUT_linux_amd64) $(GOLANG_BINARY_TARGET)
+golang-binary-word-hyphen = $(word $2,$(subst -, ,$1))
 
-GOLANG_BINARY_OUTPUT_linux_arm64=$(GOLANG_BINARY_OUTPUT_BASE)-linux-arm64
-.PHONY: golang-binary-linux-arm64
-golang-binary-linux-arm64:
-	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 \
-		go build -o $(GOLANG_BINARY_OUTPUT_linux_arm64) $(GOLANG_BINARY_TARGET)
-
-GOLANG_BINARY_OUTPUT_darwin_amd64=$(GOLANG_BINARY_OUTPUT_BASE)-darwin-amd64
-.PHONY: golang-binary-darwin-amd64
-golang-binary-darwin-amd64:
-	CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 \
-		go build -o $(GOLANG_BINARY_OUTPUT_darwin_amd64) $(GOLANG_BINARY_TARGET)
-
-GOLANG_BINARY_OUTPUT_darwin_arm64=$(GOLANG_BINARY_OUTPUT_BASE)-darwin-arm64
-.PHONY: golang-binary-darwin-arm64
-golang-binary-darwin-arm64:
-	CGO_ENABLED=0 GOOS=darwin GOARCH=arm64 \
-		go build -o $(GOLANG_BINARY_OUTPUT_darwin_arm64) $(GOLANG_BINARY_TARGET)
+# golang-binary-linux-amd64
+# golang-binary-linux-arm64
+# golang-binary-darwin-amd64
+# golang-binary-darwin-arm64
+golang-binary-%:
+	CGO_ENABLED=0 \
+	GOOS=$(call golang-binary-word-hyphen,$*,1) \
+	GOARCH=$(call golang-binary-word-hyphen,$*,2) \
+		go build -o $(GOLANG_BINARY_OUTPUT_BASE)-$* $(GOLANG_BINARY_TARGET)
 
 GOLANG_BINARY_OUTPUT_dev=$(GOLANG_BINARY_OUTPUT_BASE)-dev
 .PHONY: golang-binary-dev
