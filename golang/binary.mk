@@ -34,21 +34,21 @@ GOLANG_BINARY_GOOS_FOR_local?=linux
 GOLANG_BINARY_GOOS_FOR_production?=linux
 GOLANG_BINARY_GOARCH_FOR_production?=amd64
 
-GOLANG_BINARY_PATH_FOR_STAGE_local=$(GOLANG_BINARY_OUTPUT_$(GOLANG_BINARY_GOOS_FOR_local)_$(GOLANG_LOCAL_GOARCH))
+GOLANG_BINARY_PATH_FOR_STAGE_local=$(GOLANG_BINARY_OUTPUT_BASE)-$(GOLANG_BINARY_GOOS_FOR_local)-$(GOLANG_LOCAL_GOARCH)
 .PHONY: golang-binary-path-for-stage-local
 golang-binary-path-for-stage-local:
 	@echo "$(GOLANG_BINARY_PATH_FOR_STAGE_local)"
 .PHONY: golang-binary-build-for-stage-local
 golang-binary-build-for-stage-local: golang-binary-$(GOLANG_BINARY_GOOS_FOR_local)-$(GOLANG_LOCAL_GOARCH)
 
-GOLANG_BINARY_PATH_FOR_STAGE_production=$(GOLANG_BINARY_OUTPUT_$(GOLANG_BINARY_GOOS_FOR_production)_$(GOLANG_BINARY_GOARCH_FOR_production))
+GOLANG_BINARY_PATH_FOR_STAGE_production=$(GOLANG_BINARY_OUTPUT_BASE)-$(GOLANG_BINARY_GOOS_FOR_production)-$(GOLANG_BINARY_GOARCH_FOR_production)
 .PHONY: golang-binary-path-for-stage-production
 golang-binary-path-for-stage-production:
 	@echo "$(GOLANG_BINARY_PATH_FOR_STAGE_production)"
 .PHONY: golang-binary-build-for-stage-production
 golang-binary-build-for-stage-production: golang-binary-$(GOLANG_BINARY_GOOS_FOR_production)-$(GOLANG_BINARY_GOARCH_FOR_production)
 
-GOLANG_BINARY_PATH_FOR_STAGE_dev=$(GOLANG_BINARY_OUTPUT_$(GOLANG_LOCAL_GOOS)_$(GOLANG_LOCAL_GOARCH))
+GOLANG_BINARY_PATH_FOR_STAGE_dev=$(GOLANG_BINARY_OUTPUT_BASE)-$(GOLANG_LOCAL_GOOS)-$(GOLANG_LOCAL_GOARCH)
 .PHONY: golang-binary-path-for-stage-dev
 golang-binary-path-for-stage-dev:
 	@echo "$(GOLANG_BINARY_PATH_FOR_STAGE_dev)"
