@@ -21,9 +21,12 @@ docker-compose-up:
 docker-compose-down:
 	$(DOCKER_COMPOSE_ENVS) docker compose $(DOCKER_COMPOSE_OPTS) down $(DOCKER_COMPOSE_TARGET_SERVICES)
 
+DOCKER_COMPOSE_BUILD_OPTS?=--progress auto
+# DOCKER_COMPOSE_BUILD_OPTS?=--progress plain
+# DOCKER_COMPOSE_BUILD_OPTS?=--progress tty
 .PHONY: docker-compose-build
 docker-compose-build:
-	$(DOCKER_COMPOSE_ENVS) docker compose build
+	$(DOCKER_COMPOSE_ENVS) docker compose build $(DOCKER_COMPOSE_BUILD_OPTS)
 
 .PHONY: docker-compose-rmi
 docker-compose-rmi: docker-compose-down
