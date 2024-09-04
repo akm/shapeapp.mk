@@ -67,12 +67,10 @@ rebuild:
 	$(MAKE) rmi || true
 	$(MAKE) build
 
-MYSQL_HOST=$(shell [ "$(DEV_TARGET)" = "apisvr" ] && echo "127.0.0.1" || echo "mysql")
-
 MYSQL_ENVS=\
 	MYSQL_USER_NAME=root \
 	MYSQL_USER_PASSWORD= \
-	MYSQL_HOST=$(MYSQL_HOST) \
+	MYSQL_HOST=127.0.0.1 \
 	MYSQL_PORT=$(APP_PORT_MYSQL_e2e_test) \
 	MYSQL_DB_NAME=$(APP_MYSQL_DB_NAME)
 
