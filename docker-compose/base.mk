@@ -17,6 +17,12 @@ docker-compose-upd:
 docker-compose-down:
 	$(DOCKER_COMPOSE_ENVS) docker compose $(DOCKER_COMPOSE_OPTS) down $(DOCKER_COMPOSE_TARGET_SERVICES)
 
+docker-compose-up-%:
+	$(DOCKER_COMPOSE_ENVS) docker compose $(DOCKER_COMPOSE_OPTS) up  --wait $(subst -, ,$*)
+
+docker-compose-upd-%:
+	$(DOCKER_COMPOSE_ENVS) docker compose $(DOCKER_COMPOSE_OPTS) up -d --wait $(subst -, ,$*)
+
 DOCKER_COMPOSE_BUILD_OPTS?=--progress auto
 # DOCKER_COMPOSE_BUILD_OPTS?=--progress plain
 # DOCKER_COMPOSE_BUILD_OPTS?=--progress tty
