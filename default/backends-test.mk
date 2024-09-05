@@ -27,7 +27,7 @@ $(error "services are invalid")
 endif
 
 .PHONY: run
-run: docker-compose-run
+run: docker-compose-up
 .PHONY: up
 up: docker-compose-upd mysql-wait dbmigration-up
 .PHONY: down

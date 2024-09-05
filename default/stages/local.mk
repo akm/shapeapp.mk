@@ -69,7 +69,7 @@ SETUP_DEPS=$(SETUP_DEPS_FOR_DEV_$(DEV_TARGET))
 setup: $(SETUP_DEPS)
 
 .PHONY: run
-run: setup docker-compose-run
+run: setup docker-compose-up
 .PHONY: up
 up: setup docker-compose-upd
 .PHONY: down

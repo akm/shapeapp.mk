@@ -5,8 +5,8 @@ DOCKER_COMPOSE_OPTS?=-f $(DOCKER_COMPOSE_YAML_PATH)
 
 DOCKER_COMPOSE_TARGET_SERVICES?=
 
-.PHONY: docker-compose-run
-docker-compose-run:
+.PHONY: docker-compose-up
+docker-compose-up:
 	$(DOCKER_COMPOSE_ENVS) docker compose $(DOCKER_COMPOSE_OPTS) up --wait $(DOCKER_COMPOSE_TARGET_SERVICES)
 
 .PHONY: docker-compose-upd
