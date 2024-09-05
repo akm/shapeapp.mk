@@ -7,7 +7,7 @@ DOCKER_COMPOSE_TARGET_SERVICES?=
 
 .PHONY: docker-compose-up
 docker-compose-up:
-	$(DOCKER_COMPOSE_ENVS) docker compose $(DOCKER_COMPOSE_OPTS) up --wait $(DOCKER_COMPOSE_TARGET_SERVICES)
+	$(DOCKER_COMPOSE_ENVS) docker compose $(DOCKER_COMPOSE_OPTS) up $(DOCKER_COMPOSE_TARGET_SERVICES)
 
 .PHONY: docker-compose-upd
 docker-compose-upd:
@@ -18,7 +18,7 @@ docker-compose-down:
 	$(DOCKER_COMPOSE_ENVS) docker compose $(DOCKER_COMPOSE_OPTS) down $(DOCKER_COMPOSE_TARGET_SERVICES)
 
 docker-compose-up-%:
-	$(DOCKER_COMPOSE_ENVS) docker compose $(DOCKER_COMPOSE_OPTS) up  --wait $(subst -, ,$*)
+	$(DOCKER_COMPOSE_ENVS) docker compose $(DOCKER_COMPOSE_OPTS) up $(subst -, ,$*)
 
 docker-compose-upd-%:
 	$(DOCKER_COMPOSE_ENVS) docker compose $(DOCKER_COMPOSE_OPTS) up -d --wait $(subst -, ,$*)
