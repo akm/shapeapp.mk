@@ -52,12 +52,16 @@ uisvr-%:
 .PHONY: setup
 setup: apisvr-golang-binary-build-for-stage-local uisvr-setup
 
+.PHONY: prepare
+prepare: setup docker-compose-upd-mysql mysql-wait dbmigration-up
+
 .PHONY: run
-run: setup docker-compose-up
+run: prepare docker-compose-up
 .PHONY: up
-up: setup docker-compose-upd mysql-wait dbmigration-up
+up: prepare docker-compose-upd
 .PHONY: down
 down: docker-compose-down
+
 .PHONY: rmi
 rmi: docker-compose-rmi
 .PHONY: build
