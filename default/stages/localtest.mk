@@ -50,7 +50,7 @@ uisvr-%:
 	$(MAKE) -C $(PATH_TO_UISVR) $*
 
 .PHONY: setup
-setup: apisvr-golang-binary-build-for-stage-local uisvr-setup
+setup: apisvr-golang-binary-build-for-stage-local uisvr-setup $(APP_RPROXY_ENVOY_YAML) $(APP_UISVR_DOT_ENV_PATH)
 
 .PHONY: prepare
 prepare: setup docker-compose-upd-mysql mysql-wait dbmigration-up
