@@ -71,7 +71,7 @@ setup: $(SETUP_DEPS)
 .PHONY: run
 run: setup docker-compose-run
 .PHONY: up
-up: setup docker-compose-up
+up: setup docker-compose-upd
 .PHONY: down
 down: docker-compose-down
 .PHONY: rmi

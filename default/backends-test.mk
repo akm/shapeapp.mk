@@ -29,7 +29,7 @@ endif
 .PHONY: run
 run: docker-compose-run
 .PHONY: up
-up: docker-compose-up mysql-wait dbmigration-up
+up: docker-compose-upd mysql-wait dbmigration-up
 .PHONY: down
 down: docker-compose-down
 .PHONY: rmi

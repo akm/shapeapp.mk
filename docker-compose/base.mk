@@ -9,8 +9,8 @@ DOCKER_COMPOSE_TARGET_SERVICES?=
 docker-compose-run:
 	$(DOCKER_COMPOSE_ENVS) docker compose $(DOCKER_COMPOSE_OPTS) up --wait $(DOCKER_COMPOSE_TARGET_SERVICES)
 
-.PHONY: docker-compose-up
-docker-compose-up:
+.PHONY: docker-compose-upd
+docker-compose-upd:
 	$(DOCKER_COMPOSE_ENVS) docker compose $(DOCKER_COMPOSE_OPTS) up -d --wait $(DOCKER_COMPOSE_TARGET_SERVICES)
 
 .PHONY: docker-compose-down
