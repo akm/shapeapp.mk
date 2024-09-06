@@ -5,25 +5,30 @@ DOCKER_COMPOSE_OPTS?=-f $(DOCKER_COMPOSE_YAML_PATH)
 
 DOCKER_COMPOSE_TARGET_SERVICES?=
 
-.PHONY: docker-compose-run
-docker-compose-run:
-	$(DOCKER_COMPOSE_ENVS) docker compose $(DOCKER_COMPOSE_OPTS) up $(DOCKER_COMPOSE_TARGET_SERVICES)
-
-.PHONY: docker-compose-up-with-wait
-docker-compose-up-with-wait:
-	$(DOCKER_COMPOSE_ENVS) docker compose $(DOCKER_COMPOSE_OPTS) up -d --wait $(DOCKER_COMPOSE_TARGET_SERVICES)
-
 .PHONY: docker-compose-up
 docker-compose-up:
-	$(DOCKER_COMPOSE_ENVS) docker compose $(DOCKER_COMPOSE_OPTS) up -d $(DOCKER_COMPOSE_TARGET_SERVICES)
+	$(DOCKER_COMPOSE_ENVS) docker compose $(DOCKER_COMPOSE_OPTS) up $(DOCKER_COMPOSE_TARGET_SERVICES)
+
+.PHONY: docker-compose-upd
+docker-compose-upd:
+	$(DOCKER_COMPOSE_ENVS) docker compose $(DOCKER_COMPOSE_OPTS) up -d --wait $(DOCKER_COMPOSE_TARGET_SERVICES)
 
 .PHONY: docker-compose-down
 docker-compose-down:
 	$(DOCKER_COMPOSE_ENVS) docker compose $(DOCKER_COMPOSE_OPTS) down $(DOCKER_COMPOSE_TARGET_SERVICES)
 
+docker-compose-up-%:
+	$(DOCKER_COMPOSE_ENVS) docker compose $(DOCKER_COMPOSE_OPTS) up $(subst -, ,$*)
+
+docker-compose-upd-%:
+	$(DOCKER_COMPOSE_ENVS) docker compose $(DOCKER_COMPOSE_OPTS) up -d --wait $(subst -, ,$*)
+
+DOCKER_COMPOSE_BUILD_OPTS?=--progress auto
+# DOCKER_COMPOSE_BUILD_OPTS?=--progress plain
+# DOCKER_COMPOSE_BUILD_OPTS?=--progress tty
 .PHONY: docker-compose-build
 docker-compose-build:
-	$(DOCKER_COMPOSE_ENVS) docker compose build
+	$(DOCKER_COMPOSE_ENVS) docker compose build $(DOCKER_COMPOSE_BUILD_OPTS)
 
 .PHONY: docker-compose-rmi
 docker-compose-rmi: docker-compose-down

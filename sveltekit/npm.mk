@@ -34,6 +34,9 @@ npm-run-preview: $(PATH_TO_NODE_MODULES) $(NPM_RUN_PREVIEW_DEPS)
 npm-run-test: $(PATH_TO_NODE_MODULES) $(NPM_RUN_TEST_DEPS)
 	npm run test
 
+npm-run-test-%: $(PATH_TO_NODE_MODULES) $(NPM_RUN_TEST_DEPS)
+	npm run test:$*
+
 .PHONY: npm-run-lint
 npm-run-lint: $(PATH_TO_NODE_MODULES) $(NPM_RUN_LINT_DEPS)
 	npm run lint

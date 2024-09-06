@@ -2,7 +2,7 @@
 # - GOOGLE_CLOUD_PROJECT_LOCAL
 # - APP_FIREBASE_API_KEY
 # - APP_MYSQL_DB_NAME
-# - APP_PORT_MYSQL_dev
+# - APP_PORT_MYSQL_e2e_test
 # - MYSQL_HOST
 # - MYSQL_DSN
 # - PATH_TO_APISVR
@@ -16,17 +16,22 @@
 include $(PATH_TO_SHAPEAPPMK)/docker-compose/base.mk
 include $(PATH_TO_SHAPEAPPMK)/golang/build.mk
 
+MYSQL_ENVS_BASE=\
+	MYSQL_USER_NAME=root \
+	MYSQL_USER_PASSWORD= \
+	MYSQL_DB_NAME=$(APP_MYSQL_DB_NAME)
+
 DEV_TARGET?=all
 
 DOCKER_COMPOSE_ENVS_BASE=\
 	$(DEFAULT_PORT_ENVS) \
-	APP_PORT_RPROXY=$(APP_PORT_RPROXY_dev) \
-	APP_PORT_APISVR=$(APP_PORT_APISVR_dev) \
+	APP_PORT_RPROXY=$(APP_PORT_RPROXY_e2e_test) \
+	APP_PORT_APISVR=$(APP_PORT_APISVR_e2e_test) \
 	APP_PORT_UISVR=$(APP_PORT_UISVR_e2e_test) \
 	GOOGLE_CLOUD_PROJECT=$(GOOGLE_CLOUD_PROJECT_LOCAL) \
 	APP_FIREBASE_API_KEY=$(APP_FIREBASE_API_KEY) \
 	APP_MYSQL_DB_NAME=$(APP_MYSQL_DB_NAME) \
-	APP_MYSQL_DSN='$(shell $(MAKE) mysql-dsn)' \
+	APP_MYSQL_DSN='$(shell $(MYSQL_ENVS_BASE) MYSQL_HOST=mysql MYSQL_PORT=3306 $(MAKE) -C $(PATH_TO_SHAPEAPPMK)/mysql dsn --no-print-directory)' \
 	APP_BINARY_PATH_IN_APISVR=$(shell $(MAKE) -C $(PATH_TO_APISVR) --no-print-directory golang-binary-path-for-stage-local) \
 	DEV_TARGET=$(DEV_TARGET)
 
@@ -44,16 +49,6 @@ DOCKER_COMPOSE_ENVS=\
 	APP_UISVR_DOT_ENV=$(APP_UISVR_DOT_ENV_PATH) \
 	APP_RPROXY_ENVOY_YAML=$(APP_RPROXY_ENVOY_YAML)
 
-TARGET_SERVICES_FOR_DEV_apisvr=firebase-emulators mysql
-TARGET_SERVICES_FOR_DEV_uisvr=$(TARGET_SERVICES_FOR_DEV_apisvr) apisvr
-TARGET_SERVICES_FOR_DEV_rproxy=$(TARGET_SERVICES_FOR_DEV_uisvr) uisvr
-TARGET_SERVICES_FOR_DEV_all=$(TARGET_SERVICES_FOR_DEV_rproxy) rproxy
-DOCKER_COMPOSE_TARGET_SERVICES=$(TARGET_SERVICES_FOR_DEV_$(DEV_TARGET))
-
-ifneq "$(sort $(TARGET_SERVICES_FOR_DEV_all))" "$(sort $(DOCKER_COMPOSE_SERVICES_ALL))"
-$(error "services are invalid")
-endif
-
 # apisvr-golang-binary-build-for-stage-local
 apisvr-%:
 	$(MAKE) -C $(PATH_TO_APISVR) $*
@@ -62,21 +57,19 @@ apisvr-%:
 uisvr-%:
 	$(MAKE) -C $(PATH_TO_UISVR) $*
 
-SETUP_DEPS_FOR_DEV_apisvr=
-SETUP_DEPS_FOR_DEV_uisvr=apisvr-golang-binary-build-for-stage-local
-SETUP_DEPS_FOR_DEV_rproxy=$(SETUP_DEPS_FOR_DEV_uisvr) uisvr-setup
-SETUP_DEPS_FOR_DEV_all=$(SETUP_DEPS_FOR_DEV_rproxy)
-SETUP_DEPS=$(SETUP_DEPS_FOR_DEV_$(DEV_TARGET))
-
 .PHONY: setup
-setup: $(SETUP_DEPS)
+setup: apisvr-golang-binary-build-for-stage-local uisvr-setup $(APP_RPROXY_ENVOY_YAML) $(APP_UISVR_DOT_ENV_PATH)
+
+.PHONY: prepare
+prepare: setup docker-compose-upd-mysql mysql-wait dbmigration-up
 
 .PHONY: run
-run: setup docker-compose-up
+run: prepare docker-compose-up
 .PHONY: up
-up: setup docker-compose-upd
+up: prepare docker-compose-upd
 .PHONY: down
 down: docker-compose-down
+
 .PHONY: rmi
 rmi: docker-compose-rmi
 .PHONY: build
@@ -86,14 +79,9 @@ rebuild:
 	$(MAKE) rmi || true
 	$(MAKE) build
 
-MYSQL_HOST=$(shell [ "$(DEV_TARGET)" = "apisvr" ] && echo "127.0.0.1" || echo "mysql")
-
-MYSQL_ENVS=\
-	MYSQL_USER_NAME=root \
-	MYSQL_USER_PASSWORD= \
-	MYSQL_HOST=$(MYSQL_HOST) \
-	MYSQL_PORT=$(APP_PORT_MYSQL_dev) \
-	MYSQL_DB_NAME=$(APP_MYSQL_DB_NAME)
+MYSQL_ENVS=$(MYSQL_ENVS_BASE) \
+	MYSQL_HOST=127.0.0.1 \
+	MYSQL_PORT=$(APP_PORT_MYSQL_e2e_test)
 
 include $(PATH_TO_SHAPEAPPMK)/mysql/base.mk
 
