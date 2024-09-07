@@ -2,7 +2,7 @@
 define shell-dir-target-vars
 	$(eval
 		$(foreach target,$(3),
-			$(eval $(1)$(target)=$$(shell $(MAKE) -C $(2) $(target) --no-print-directory))
+			$(eval $(2)$(target)=$$(shell $(MAKE) -C $(1) $(target) --no-print-directory))
 		)
 	)
 endef

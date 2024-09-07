@@ -53,7 +53,7 @@ reset: goose-reset
 DBMIGRATIONS_TEST_PATH_TO_CONTAINERS=$(PATH_TO_BACKENDS)/test/containers
 
 # TEST_CONTAINERS-mysql-dsn
-$(call shell-dir-target-vars,TEST_CONTAINERS-,$(DBMIGRATIONS_TEST_PATH_TO_CONTAINERS),mysql-dsn)
+$(call shell-dir-target-vars,$(DBMIGRATIONS_TEST_PATH_TO_CONTAINERS),TEST_CONTAINERS-,mysql-dsn)
 
 .PHONY: test-containers-up
 test-containers-up:

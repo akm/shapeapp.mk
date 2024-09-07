@@ -16,7 +16,7 @@ test-containers-%:
 	$(MAKE) -C ../test/containers $*
 
 # TEST_CONTAINERS-mysql-envs
-$(call shell-dir-target-vars,TEST_CONTAINERS-,$(BIZ_PATH_TO_TEST_CONTAINERS),mysql-envs)
+$(call shell-dir-target-vars,$(BIZ_PATH_TO_TEST_CONTAINERS),TEST_CONTAINERS-,mysql-envs)
 
 .PHONY: dump-schema-sql
 dump-schema-sql: \
