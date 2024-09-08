@@ -24,14 +24,14 @@ DEV_TARGET?=apisvr
 APISVR_DEV_TARGET_PACKAGE?=./cmd/server
 APISVR_DEV_PATH_TO_CONTAINERS?=$(PATH_TO_ROOT)/stages/local
 
-# DEV_CONTAINERS-mysql-dsn
-$(call shell-dir-target-vars,DEV_CONTAINERS-,$(APISVR_DEV_PATH_TO_CONTAINERS),mysql-dsn)
+# DEV_CONTAINERS-mysql-dsn-from-inside
+$(call shell-dir-target-vars,$(APISVR_DEV_PATH_TO_CONTAINERS),DEV_CONTAINERS-,mysql-dsn-from-inside)
 
 APISVR_DEV_VARS?=$(APISVR_ENV_VARS)
 APISVR_DEV_ENVS?=$(APISVR_ENVS_BASE) \
 	LOG_LEVEL=debug \
 	LOG_FORMAT=text \
-	DB_DSN='$(DEV_CONTAINERS-mysql-dsn)' \
+	DB_DSN='$(DEV_CONTAINERS-mysql-dsn-from-inside)' \
 	$(foreach var,$(APISVR_DEV_VARS),$(var)=$($(var)))
 
 .PHONY: dev-containers-up

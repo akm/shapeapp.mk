@@ -16,7 +16,7 @@ test-containers-%:
 	$(MAKE) -C ../test/containers $*
 
 # TEST_CONTAINERS-mysql-envs
-$(call shell-dir-target-vars,TEST_CONTAINERS-,$(BIZ_PATH_TO_TEST_CONTAINERS),mysql-envs)
+$(call shell-dir-target-vars,$(BIZ_PATH_TO_TEST_CONTAINERS),TEST_CONTAINERS-,mysql-envs)
 
 .PHONY: dump-schema-sql
 dump-schema-sql: \
@@ -27,7 +27,6 @@ dump-schema-sql: \
 
 .PHONY: dump-schema-sql-impl
 dump-schema-sql-impl:
-	$(TEST_CONTAINERS-mysql-envs) \
-	DUMP_OPTS=--no-data \
-	DUMP_POST_PROCESS='| grep -v "Dump completed on" > $(abspath $(SCHEMA_SQL))' \
-	$(MAKE) -C $(PATH_TO_SHAPEAPPMK)/mysql dump
+	MYSQL_DUMP_OPTS=--no-data \
+	MYSQL_DUMP_POST_PROCESS='| grep -v "Dump completed on" > $(abspath $(SCHEMA_SQL))' \
+	$(MAKE) -C $(BIZ_PATH_TO_TEST_CONTAINERS) mysql-dump
