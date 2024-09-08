@@ -31,7 +31,7 @@ DOCKER_COMPOSE_ENVS_BASE=\
 	GOOGLE_CLOUD_PROJECT=$(GOOGLE_CLOUD_PROJECT_LOCAL) \
 	APP_FIREBASE_API_KEY=$(APP_FIREBASE_API_KEY) \
 	APP_MYSQL_DB_NAME=$(APP_MYSQL_DB_NAME) \
-	APP_MYSQL_DSN='$(mysql-dsn-from-outside)' \
+	APP_MYSQL_DSN='$(mysql-dsn-from-inside)' \
 	APP_BINARY_PATH_IN_APISVR=$(shell $(MAKE) -C $(PATH_TO_APISVR) --no-print-directory golang-binary-path-for-stage-local) \
 	DEV_TARGET=$(DEV_TARGET)
 
