@@ -13,7 +13,7 @@
 include $(PATH_TO_SHAPEAPPMK)/golang/base.mk
 
 GOOSE_TARGET_ENV_PATH?=$(PATH_TO_ROOT)/stages/local
-GOOSE_DSN?=$(shell $(MAKE) -C $(GOOSE_TARGET_ENV_PATH) mysql-dsn)
+GOOSE_DSN?=$(shell $(MAKE) -C $(GOOSE_TARGET_ENV_PATH) mysql-dsn-from-outside)
 GOOSE_MAIN_PACKAGE=./cmd/runner
 GOOSE_ENVS=\
 	APP_ENV=$(APP_ENV) \
@@ -52,8 +52,8 @@ reset: goose-reset
 
 DBMIGRATIONS_TEST_PATH_TO_CONTAINERS=$(PATH_TO_BACKENDS)/test/containers
 
-# TEST_CONTAINERS-mysql-dsn
-$(call shell-dir-target-vars,$(DBMIGRATIONS_TEST_PATH_TO_CONTAINERS),TEST_CONTAINERS-,mysql-dsn)
+# TEST_CONTAINERS-mysql-dsn-from-outside
+$(call shell-dir-target-vars,$(DBMIGRATIONS_TEST_PATH_TO_CONTAINERS),TEST_CONTAINERS-,mysql-dsn-from-outside)
 
 .PHONY: test-containers-up
 test-containers-up:
@@ -68,7 +68,7 @@ test-containers-down:
 # test-run では すべての down を実行する reset を実行する
 .PHONY: test-run
 test-run:
-	$(MAKE) reset GOOSE_DSN='$(TEST_CONTAINERS-mysql-dsn)'
+	$(MAKE) reset GOOSE_DSN='$(TEST_CONTAINERS-mysql-dsn-from-outside)'
 
 .PHONY: test
 test: test-containers-down test-containers-up test-run
