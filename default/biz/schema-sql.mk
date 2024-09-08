@@ -27,7 +27,6 @@ dump-schema-sql: \
 
 .PHONY: dump-schema-sql-impl
 dump-schema-sql-impl:
-	$(TEST_CONTAINERS-mysql-envs) \
-	DUMP_OPTS=--no-data \
-	DUMP_POST_PROCESS='| grep -v "Dump completed on" > $(abspath $(SCHEMA_SQL))' \
-	$(MAKE) -C $(PATH_TO_SHAPEAPPMK)/mysql dump
+	MYSQL_DUMP_OPTS=--no-data \
+	MYSQL_DUMP_POST_PROCESS='| grep -v "Dump completed on" > $(abspath $(SCHEMA_SQL))' \
+	$(MAKE) -C $(BIZ_PATH_TO_TEST_CONTAINERS) mysql-dump

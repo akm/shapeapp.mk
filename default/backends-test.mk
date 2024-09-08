@@ -37,16 +37,15 @@ rmi: docker-compose-rmi
 .PHONY: rebuild
 rebuild: docker-compose-rebuild
 
-MYSQL_ENVS=\
-	MYSQL_USER_NAME=root \
-	MYSQL_USER_PASSWORD= \
-	MYSQL_HOST=127.0.0.1 \
-	MYSQL_PORT=$(APP_PORT_MYSQL_unit_test) \
-	MYSQL_DB_NAME=$(TEST_MYSQL_DB_NAME)
+MYSQL_USER_NAME=root
+MYSQL_USER_PASSWORD=
+MYSQL_HOST=mysql
+MYSQL_PORT=$(APP_PORT_MYSQL_unit_test)
+MYSQL_DB_NAME=$(TEST_MYSQL_DB_NAME)
 
-include $(PATH_TO_SHAPEAPPMK)/mysql/base.mk
+include $(PATH_TO_SHAPEAPPMK)/mysql/default.mk
 
 .PHONY: dbmigration-up
 dbmigration-up:
-	APP_ENV=unit_test GOOSE_DSN='$(MYSQL_DSN)' \
+	APP_ENV=unit_test GOOSE_DSN='$(mysql-dsn-from-outside)' \
 	$(MAKE) -C $(PATH_TO_DBMIGRATIONS) up

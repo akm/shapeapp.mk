@@ -4,7 +4,6 @@
 # - APP_MYSQL_DB_NAME
 # - APP_PORT_MYSQL_dev
 # - MYSQL_HOST
-# - MYSQL_DSN
 # - PATH_TO_APISVR
 # - PATH_TO_UISVR
 # - PATH_TO_DBMIGRATIONS
@@ -18,6 +17,12 @@ include $(PATH_TO_SHAPEAPPMK)/golang/build.mk
 
 DEV_TARGET?=all
 
+ifeq ("$(DEV_TARGET)","apisvr")
+APP_MYSQL_DSN=$(mysql-dsn-from-outside)
+else
+APP_MYSQL_DSN=$(mysql-dsn-from-inside)
+endif
+
 DOCKER_COMPOSE_ENVS_BASE=\
 	$(DEFAULT_PORT_ENVS) \
 	APP_PORT_RPROXY=$(APP_PORT_RPROXY_dev) \
@@ -26,7 +31,7 @@ DOCKER_COMPOSE_ENVS_BASE=\
 	GOOGLE_CLOUD_PROJECT=$(GOOGLE_CLOUD_PROJECT_LOCAL) \
 	APP_FIREBASE_API_KEY=$(APP_FIREBASE_API_KEY) \
 	APP_MYSQL_DB_NAME=$(APP_MYSQL_DB_NAME) \
-	APP_MYSQL_DSN='$(shell $(MAKE) mysql-dsn)' \
+	APP_MYSQL_DSN='$(APP_MYSQL_DSN)' \
 	APP_BINARY_PATH_IN_APISVR=$(shell $(MAKE) -C $(PATH_TO_APISVR) --no-print-directory golang-binary-path-for-stage-local) \
 	DEV_TARGET=$(DEV_TARGET)
 
@@ -86,18 +91,16 @@ rebuild:
 	$(MAKE) rmi || true
 	$(MAKE) build
 
-MYSQL_HOST=$(shell [ "$(DEV_TARGET)" = "apisvr" ] && echo "127.0.0.1" || echo "mysql")
 
-MYSQL_ENVS=\
-	MYSQL_USER_NAME=root \
-	MYSQL_USER_PASSWORD= \
-	MYSQL_HOST=$(MYSQL_HOST) \
-	MYSQL_PORT=$(APP_PORT_MYSQL_dev) \
-	MYSQL_DB_NAME=$(APP_MYSQL_DB_NAME)
+MYSQL_USER_NAME=root
+MYSQL_USER_PASSWORD=
+MYSQL_HOST=$(MYSQL_HOST)
+MYSQL_PORT=$(APP_PORT_MYSQL_dev)
+MYSQL_DB_NAME=$(APP_MYSQL_DB_NAME)
 
-include $(PATH_TO_SHAPEAPPMK)/mysql/base.mk
+include $(PATH_TO_SHAPEAPPMK)/mysql/default.mk
 
 .PHONY: dbmigration-up
 dbmigration-up:
-	GOOSE_DSN='$(MYSQL_DSN)' \
+	GOOSE_DSN='$(mysql-dsn-from-outside)' \
 	$(MAKE) -C $(PATH_TO_DBMIGRATIONS) up

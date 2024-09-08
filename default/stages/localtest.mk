@@ -4,7 +4,6 @@
 # - APP_MYSQL_DB_NAME
 # - APP_PORT_MYSQL_e2e_test
 # - MYSQL_HOST
-# - MYSQL_DSN
 # - PATH_TO_APISVR
 # - PATH_TO_UISVR
 # - PATH_TO_DBMIGRATIONS
@@ -16,10 +15,11 @@
 include $(PATH_TO_SHAPEAPPMK)/docker-compose/base.mk
 include $(PATH_TO_SHAPEAPPMK)/golang/build.mk
 
-MYSQL_ENVS_BASE=\
-	MYSQL_USER_NAME=root \
-	MYSQL_USER_PASSWORD= \
-	MYSQL_DB_NAME=$(APP_MYSQL_DB_NAME)
+MYSQL_USER_NAME=root
+MYSQL_USER_PASSWORD=
+MYSQL_HOST=mysql
+MYSQL_PORT=$(APP_PORT_MYSQL_e2e_test)
+MYSQL_DB_NAME=$(APP_MYSQL_DB_NAME)
 
 DEV_TARGET?=all
 
@@ -31,7 +31,7 @@ DOCKER_COMPOSE_ENVS_BASE=\
 	GOOGLE_CLOUD_PROJECT=$(GOOGLE_CLOUD_PROJECT_LOCAL) \
 	APP_FIREBASE_API_KEY=$(APP_FIREBASE_API_KEY) \
 	APP_MYSQL_DB_NAME=$(APP_MYSQL_DB_NAME) \
-	APP_MYSQL_DSN='$(shell $(MYSQL_ENVS_BASE) MYSQL_HOST=mysql MYSQL_PORT=3306 $(MAKE) -C $(PATH_TO_SHAPEAPPMK)/mysql dsn --no-print-directory)' \
+	APP_MYSQL_DSN='$(mysql-dsn-from-outside)' \
 	APP_BINARY_PATH_IN_APISVR=$(shell $(MAKE) -C $(PATH_TO_APISVR) --no-print-directory golang-binary-path-for-stage-local) \
 	DEV_TARGET=$(DEV_TARGET)
 
@@ -79,13 +79,9 @@ rebuild:
 	$(MAKE) rmi || true
 	$(MAKE) build
 
-MYSQL_ENVS=$(MYSQL_ENVS_BASE) \
-	MYSQL_HOST=127.0.0.1 \
-	MYSQL_PORT=$(APP_PORT_MYSQL_e2e_test)
-
-include $(PATH_TO_SHAPEAPPMK)/mysql/base.mk
+include $(PATH_TO_SHAPEAPPMK)/mysql/default.mk
 
 .PHONY: dbmigration-up
 dbmigration-up:
-	GOOSE_DSN='$(MYSQL_DSN)' \
+	GOOSE_DSN='$(mysql-dsn-from-outside)' \
 	$(MAKE) -C $(PATH_TO_DBMIGRATIONS) up
