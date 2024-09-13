@@ -12,7 +12,7 @@
 
 include $(PATH_TO_SHAPEAPPMK)/golang/base.mk
 
-GOOSE_TARGET_ENV_PATH?=$(PATH_TO_ROOT)/stages/local
+GOOSE_TARGET_ENV_PATH?=$(PATH_TO_ROOT)/stages/localdev
 GOOSE_DSN?=$(shell $(MAKE) -C $(GOOSE_TARGET_ENV_PATH) mysql-dsn-from-outside)
 GOOSE_MAIN_PACKAGE=./cmd/runner
 GOOSE_ENVS=\
