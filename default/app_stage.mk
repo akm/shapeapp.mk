@@ -37,7 +37,7 @@ APP_STAGE_TYPE?=dev
 # と異なり、staging1 などの具体的なステージ名を指定します。
 ifeq ($(APP_STAGE_TYPE),dev)
 APP_STAGE?=$(APP_STAGE_TYPE)
-else ifeq ($(APP_STAGE_TYPE),local)
+else ifeq ($(APP_STAGE_TYPE),localdev)
 APP_STAGE?=$(APP_STAGE_TYPE)
 else ifeq ($(APP_STAGE_TYPE),localtest)
 APP_STAGE?=$(APP_STAGE_TYPE)
