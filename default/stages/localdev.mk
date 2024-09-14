@@ -68,8 +68,8 @@ uisvr-%:
 	$(MAKE) -C $(PATH_TO_UISVR) $*
 
 SETUP_DEPS_FOR_DEV_apisvr=
-SETUP_DEPS_FOR_DEV_uisvr=apisvr-golang-binary-build-for-stage-local
-SETUP_DEPS_FOR_DEV_rproxy=$(SETUP_DEPS_FOR_DEV_uisvr) uisvr-setup
+SETUP_DEPS_FOR_DEV_uisvr=apisvr-golang-binary-build-for-stage-local $(APP_UISVR_DOT_ENV_PATH)
+SETUP_DEPS_FOR_DEV_rproxy=$(SETUP_DEPS_FOR_DEV_uisvr) uisvr-setup $(APP_RPROXY_ENVOY_YAML)
 SETUP_DEPS_FOR_DEV_all=$(SETUP_DEPS_FOR_DEV_rproxy)
 SETUP_DEPS=$(SETUP_DEPS_FOR_DEV_$(DEV_TARGET))
 
