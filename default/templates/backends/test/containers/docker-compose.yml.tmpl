@@ -1,7 +1,7 @@
 # Variable substitution
 # https://docs.docker.com/compose/compose-file/compose-file-v3/#variable-substitution
 # 環境変数は backends/test/containers/Makefile で設定されています。
-name: "svelte-connect-todo-backends-test"
+name: "{{ .APP_BASE_NAME }}-backends-test"
 services:
   firebase-emulators:
     hostname: firebase-emulators
