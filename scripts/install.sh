@@ -7,7 +7,7 @@ git init .
 git add README.md
 
 ## vendor/shapeappmk
-git submodule add git@github.com:akm/shapeapp.mk.git vendor/shapeappmk
+git submodule add -b ${SHAPEAPPMK_BRANCH:-main} git@github.com:akm/shapeapp.mk.git vendor/shapeappmk
 
 ## .config.mk
 cat <<EOF > .config.mk
