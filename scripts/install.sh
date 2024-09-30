@@ -38,4 +38,5 @@ EOF
 cat <<EOF > Makefile
 PATH_TO_ROOT=.
 include \$(PATH_TO_ROOT)/.shapeapp.mk
+include \$(PATH_TO_SHAPEAPPMK)/default/setup.mk
 EOF
