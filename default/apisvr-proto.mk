@@ -13,7 +13,7 @@ lint: buf-lint
 .PHONY: generate
 generate: $(PROTOC_GEN_CONNECT_GO_CLI) $(PROTOC_GEN_GO_CLI) buf-generate
 
-include $(PATH_TO_SHAPEAPPMK)/grpcurl/base.mk
+include $(PATH_TO_SHAPEAPPMK)/components/atoms/grpcurl/base.mk
 
 .PHONY: test-connections
 test-connections: $(GRPCURL_CLI) $(BUF_CLI) build
