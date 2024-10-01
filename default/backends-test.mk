@@ -5,7 +5,7 @@
 # - APP_PORT_MYSQL_unit_test
 # - PATH_TO_SHAPEAPPMK
 
-include $(PATH_TO_SHAPEAPPMK)/docker-compose/base.mk
+include $(PATH_TO_SHAPEAPPMK)/components/atoms/docker-compose/base.mk
 
 TEST_MYSQL_DB_NAME=$(APP_MYSQL_DB_NAME)-test
 

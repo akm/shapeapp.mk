@@ -12,7 +12,7 @@
 # - DEV_TARGET
 
 
-include $(PATH_TO_SHAPEAPPMK)/docker-compose/base.mk
+include $(PATH_TO_SHAPEAPPMK)/components/atoms/docker-compose/base.mk
 include $(PATH_TO_SHAPEAPPMK)/golang/build.mk
 
 DEV_TARGET?=all
