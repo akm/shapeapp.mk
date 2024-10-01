@@ -34,9 +34,9 @@ include $(PATH_TO_SHAPEAPPMK)/git/check.mk
 include $(PATH_TO_SHAPEAPPMK)/sveltekit/npm.mk
 include $(PATH_TO_SHAPEAPPMK)/sveltekit/app.mk
 
-include $(PATH_TO_SHAPEAPPMK)/connect-web/install.mk
+include $(PATH_TO_SHAPEAPPMK)/components/atoms/connect-web/install.mk
 CONNECT_WEB_PATH_TO_PROTO=$(PATH_TO_APISVR)/proto
-include $(PATH_TO_SHAPEAPPMK)/connect-web/generate.mk
+include $(PATH_TO_SHAPEAPPMK)/components/atoms/connect-web/generate.mk
 
 .PHONY: generate
 generate: connect-web-generate npm-run-format
