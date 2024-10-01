@@ -1,7 +1,7 @@
 include $(PATH_TO_SHAPEAPPMK)/components/atoms/git/check.mk
 include $(PATH_TO_SHAPEAPPMK)/components/atoms/buf/buf.mk
 include $(PATH_TO_SHAPEAPPMK)/components/atoms/buf/proto/base.mk
-include $(PATH_TO_SHAPEAPPMK)/protobuf/protoc-gen-go.mk
+include $(PATH_TO_SHAPEAPPMK)/components/atoms/protobuf/protoc-gen-go.mk
 include $(PATH_TO_SHAPEAPPMK)/components/atoms/connect-go/protoc-gen-connect-go.mk
 
 .PHONY: build
