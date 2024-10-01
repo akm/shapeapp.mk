@@ -1,5 +1,5 @@
 # Requires:
-# include $(PATH_TO_SHAPEAPPMK)/text-template-cli/base.mk
+# include $(PATH_TO_SHAPEAPPMK)/components/atoms/text-template-cli/base.mk
 
 SETUP_GOLANG_VERSION=$(shell cat $(PATH_TO_SHAPEAPPMK)/default/templates/.tool-versions | grep golang | cut -d ' ' -f 2)
 

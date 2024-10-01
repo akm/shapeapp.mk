@@ -1,5 +1,5 @@
 # Requires:
-# include $(PATH_TO_SHAPEAPPMK)/text-template-cli/base.mk
+# include $(PATH_TO_SHAPEAPPMK)/components/atoms/text-template-cli/base.mk
 
 SQLC_CLI_VERSION?=latest
 SQLC_CLI_MODULE=github.com/sqlc-dev/sqlc/cmd/sqlc
