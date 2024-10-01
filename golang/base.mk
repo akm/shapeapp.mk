@@ -13,6 +13,6 @@ include $(PATH_TO_SHAPEAPPMK)/golang/build.mk
 .PHONY: build
 build: golang-build-all
 
-include $(PATH_TO_SHAPEAPPMK)/golangci-lint/lint.mk
+include $(PATH_TO_SHAPEAPPMK)/components/atoms/golangci-lint/lint.mk
 .PHONY: lint
 lint: golangci-lint-lint
