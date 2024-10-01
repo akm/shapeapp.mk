@@ -14,7 +14,7 @@ $(SQLC_YAML):
 
 .PHONY: sqlc-yaml-gen
 sqlc-yaml-gen: $(TEXT_TEMPLATE_CLI)
-	$(TEXT_TEMPLATE_CLI) $(PATH_TO_SHAPEAPPMK)/sqlc/$(SQLC_YAML_TEMPLATE) > $(SQLC_YAML)
+	$(TEXT_TEMPLATE_CLI) $(PATH_TO_SHAPEAPPMK)/components/atoms/sqlc/$(SQLC_YAML_TEMPLATE) > $(SQLC_YAML)
 
 .PHONY: sqlc-generate
 sqlc-generate: $(SQLC_CLI) $(SQLC_YAML)
