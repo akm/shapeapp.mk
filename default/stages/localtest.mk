@@ -79,7 +79,7 @@ rebuild:
 	$(MAKE) rmi || true
 	$(MAKE) build
 
-include $(PATH_TO_SHAPEAPPMK)/mysql/default.mk
+include $(PATH_TO_SHAPEAPPMK)/components/molecules/mysql/default.mk
 
 .PHONY: dbmigration-up
 dbmigration-up:

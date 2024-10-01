@@ -43,7 +43,7 @@ MYSQL_HOST=mysql
 MYSQL_PORT=$(APP_PORT_MYSQL_unit_test)
 MYSQL_DB_NAME=$(TEST_MYSQL_DB_NAME)
 
-include $(PATH_TO_SHAPEAPPMK)/mysql/default.mk
+include $(PATH_TO_SHAPEAPPMK)/components/molecules/mysql/default.mk
 
 .PHONY: dbmigration-up
 dbmigration-up:
