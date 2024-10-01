@@ -4,7 +4,7 @@ default: build lint test
 PATH_TO_ROOT:=../..
 include $(PATH_TO_ROOT)/.shapeapp.mk
 
-include $(PATH_TO_SHAPEAPPMK)/components/organisms/golang/base.mk
+include $(PATH_TO_SHAPEAPPMK)/components/organelles/golang/base.mk
 
 .PHONY: test
 test:

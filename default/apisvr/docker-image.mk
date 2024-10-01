@@ -13,4 +13,4 @@ DOCKER_IMAGE_BUILD_DEPS?=$(BINARY_FILE)
 DOCKER_IMAGE_BUILD_OPTS?=\
 	--build-arg APP_BIN_PATH=$(BINARY_FILE) \
 	-f Dockerfile
-include $(PATH_TO_SHAPEAPPMK)/components/organisms/golang/docker-image.mk
+include $(PATH_TO_SHAPEAPPMK)/components/organelles/golang/docker-image.mk

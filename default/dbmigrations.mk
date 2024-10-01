@@ -10,7 +10,7 @@
 # included targets:
 # - goose/commands.mk
 
-include $(PATH_TO_SHAPEAPPMK)/components/organisms/golang/base.mk
+include $(PATH_TO_SHAPEAPPMK)/components/organelles/golang/base.mk
 
 GOOSE_TARGET_ENV_PATH?=$(PATH_TO_ROOT)/stages/localdev
 GOOSE_DSN?=$(shell $(MAKE) -C $(GOOSE_TARGET_ENV_PATH) mysql-dsn-from-outside)
