@@ -8,7 +8,7 @@ include $(PATH_TO_SHAPEAPPMK)/components/organelles/golang/base.mk
 include $(PATH_TO_SHAPEAPPMK)/components/atoms/git/check.mk
 include $(PATH_TO_SHAPEAPPMK)/components/atoms/sqlc/base.mk
 
-include $(PATH_TO_SHAPEAPPMK)/default/biz/schema-sql.mk
+include $(PATH_TO_SHAPEAPPMK)/components/cells/biz/schema-sql.mk
 
 .PHONY: test
 test:
