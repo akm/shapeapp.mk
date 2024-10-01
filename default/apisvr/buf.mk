@@ -8,7 +8,7 @@
 # Included .mk files:
 # - buf/buf.mk
 
-include $(PATH_TO_SHAPEAPPMK)/buf/buf.mk
+include $(PATH_TO_SHAPEAPPMK)/components/atoms/buf/buf.mk
 
 BUF_APP_GEN_PATH_TO_PROTO?=./proto
 

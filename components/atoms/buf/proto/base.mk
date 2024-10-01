@@ -1,5 +1,5 @@
 # Requires:
-# include $(PATH_TO_SHAPEAPPMK)/buf/buf.mk
+# include $(PATH_TO_SHAPEAPPMK)/components/atoms/buf/buf.mk
 
 BUF_YAML=buf.yaml
 $(BUF_YAML):
