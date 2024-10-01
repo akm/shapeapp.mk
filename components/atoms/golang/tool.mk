@@ -28,5 +28,5 @@ endef
 define golang-tool-cli-install-with-prefix
 	CLI_VERSION=$($(1)_CLI_VERSION) \
 	CLI_MODULE=$($(1)_CLI_MODULE) \
-	$(MAKE) -C $(PATH_TO_SHAPEAPPMK)/golang/tool cli-install
+	$(MAKE) -C $(PATH_TO_SHAPEAPPMK)/components/atoms/golang/tool cli-install
 endef

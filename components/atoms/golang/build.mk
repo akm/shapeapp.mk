@@ -2,8 +2,8 @@
 golang-build-all:
 	go build ./...
 
-GOLANG_LOCAL_GOOS?=$(shell go run $(PATH_TO_SHAPEAPPMK)/golang/goos.go)
-GOLANG_LOCAL_GOARCH?=$(shell go run $(PATH_TO_SHAPEAPPMK)/golang/goarch.go)
+GOLANG_LOCAL_GOOS?=$(shell go run $(PATH_TO_SHAPEAPPMK)/components/atoms/golang/goos.go)
+GOLANG_LOCAL_GOARCH?=$(shell go run $(PATH_TO_SHAPEAPPMK)/components/atoms/golang/goarch.go)
 
 .PHONY: golang-local-goos
 golang-local-goos:

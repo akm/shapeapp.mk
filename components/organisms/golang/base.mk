@@ -9,7 +9,7 @@
 # - golang/build.mk
 # - golangci-lint/lint.mk
 
-include $(PATH_TO_SHAPEAPPMK)/golang/build.mk
+include $(PATH_TO_SHAPEAPPMK)/components/atoms/golang/build.mk
 .PHONY: build
 build: golang-build-all
 

@@ -13,7 +13,7 @@
 
 
 include $(PATH_TO_SHAPEAPPMK)/components/atoms/docker-compose/base.mk
-include $(PATH_TO_SHAPEAPPMK)/golang/build.mk
+include $(PATH_TO_SHAPEAPPMK)/components/atoms/golang/build.mk
 
 MYSQL_USER_NAME=root
 MYSQL_USER_PASSWORD=
