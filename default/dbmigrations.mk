@@ -20,7 +20,7 @@ GOOSE_ENVS=\
 	APP_STAGE=$(APP_STAGE) \
 	APP_STAGE_TYPE=$(APP_STAGE_TYPE)
 
-include $(PATH_TO_SHAPEAPPMK)/goose/commands.mk
+include $(PATH_TO_SHAPEAPPMK)/components/atoms/goose/commands.mk
 
 ifeq (new,$(firstword $(MAKECMDGOALS)))
   NEW_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
