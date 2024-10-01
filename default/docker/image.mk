@@ -8,11 +8,11 @@
 # - build
 #
 # Don't include the following:
-# - include $(PATH_TO_SHAPEAPPMK)/git/current.mk
+# - include $(PATH_TO_SHAPEAPPMK)/components/atoms/git/current.mk
 # - include $(PATH_TO_SHAPEAPPMK)/components/atoms/docker/image.mk
 # - include $(PATH_TO_SHAPEAPPMK)/components/atoms/docker/image-push.mk
 
-include $(PATH_TO_SHAPEAPPMK)/git/current.mk
+include $(PATH_TO_SHAPEAPPMK)/components/atoms/git/current.mk
 
 DOCKER_IMAGE_NAME_COMMIT_HASH=$(DOCKER_IMAGE_REPOSITORY):$(GIT_CURRENT_COMMIT_HASH_SHORT)
 DOCKER_IMAGE_NAME?=$(DOCKER_IMAGE_REPOSITORY):$(APP_STAGE_TYPE)
