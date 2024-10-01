@@ -1,5 +1,5 @@
 # Requires:
-# - include $(PATH_TO_SHAPEAPPMK)/sveltekit/npm.mk
+# - include $(PATH_TO_SHAPEAPPMK)/components/atoms/sveltekit/npm.mk
 
 .PHONY: install
 install: npm-ci

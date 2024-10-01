@@ -31,8 +31,8 @@ dev-run: setup .env npm-run-dev
 dev: dev-containers-up dev-run
 
 include $(PATH_TO_SHAPEAPPMK)/components/atoms/git/check.mk
-include $(PATH_TO_SHAPEAPPMK)/sveltekit/npm.mk
-include $(PATH_TO_SHAPEAPPMK)/sveltekit/app.mk
+include $(PATH_TO_SHAPEAPPMK)/components/atoms/sveltekit/npm.mk
+include $(PATH_TO_SHAPEAPPMK)/components/atoms/sveltekit/app.mk
 
 include $(PATH_TO_SHAPEAPPMK)/components/atoms/connect-web/install.mk
 CONNECT_WEB_PATH_TO_PROTO=$(PATH_TO_APISVR)/proto
