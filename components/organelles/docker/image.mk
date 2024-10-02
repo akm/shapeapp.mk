@@ -22,4 +22,3 @@ include $(PATH_TO_SHAPEAPPMK)/components/atoms/docker/image-push.mk
 
 .PHONY: push
 push: build docker-image-push
-

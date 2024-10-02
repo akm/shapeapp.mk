@@ -9,7 +9,7 @@ build:
 
 DOCKER_IMAGE_REPOSITORY=$(shell $(MAKE) -C $(PATH_TO_UISVR) --no-print-directory docker-image-name)
 DOCKER_IMAGE_BUILD_OPTS=--platform linux/amd64 -f Dockerfile
-include $(PATH_TO_SHAPEAPPMK)/default/docker/image.mk
+include $(PATH_TO_SHAPEAPPMK)/components/organelles/docker/image.mk
 
 APISVR_ORIGIN=$(shell $(MAKE) -C ../apisvr --no-print-directory service_url)
 .PHONY: apisvr_origin
