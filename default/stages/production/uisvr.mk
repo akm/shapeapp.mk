@@ -26,4 +26,4 @@ GOOGLE_CLOUD_RUN_UPDATE_TRAFFIC_OPTS=\
 		--to-latest \
 		--platform=managed \
 		--region=$(GCP_REGION)
-include $(PATH_TO_SHAPEAPPMK)/default/google-cloud/cloud-run.mk
+include $(PATH_TO_SHAPEAPPMK)/components/organisms/google-cloud/cloud-run.mk
