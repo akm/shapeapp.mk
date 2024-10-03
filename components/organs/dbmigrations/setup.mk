@@ -4,4 +4,4 @@
 .PHONY: setup
 setup: $(GIT_EXEC_CLI)
 	$(GIT_EXEC_CLI) go mod init dbmigrations
-	$(GIT_EXEC_CLI) got mod tidy
+	$(GIT_EXEC_CLI) go mod tidy
