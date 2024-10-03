@@ -5,9 +5,11 @@ APPLICATION_DIR_NAME=$(basename $PWD)
 echo "# ${APPLICATION_DIR_NAME}" > README.md 
 git init .
 git add README.md
+git commit -m "🎉 Initial commit"
 
 ## vendor/shapeappmk
 git submodule add -b ${SHAPEAPPMK_BRANCH:-main} git@github.com:akm/shapeapp.mk.git vendor/shapeappmk
+git commit -m "📦 Add vendor/shapeappmk submodule"
 
 ## .config.mk
 cat <<EOF > .config.mk
@@ -19,6 +21,8 @@ APP_FIREBASE_API_KEY?=firebase-api-key-dummy1
 CONFIG_VARS=APP_BASE_NAME APP_MYSQL_DB_NAME GOOGLE_CLOUD_PROJECT_LOCAL APP_FIREBASE_API_KEY
 CONFIG_ENVS=\$(foreach v,\$(CONFIG_VARS),\$(v)=\$(\$(v)))
 EOF
+git add .config.mk
+git commit -m "🔨 Add .config.mk"
 
 ## .shapeapp.mk
 cat <<EOF > .shapeapp.mk
@@ -34,6 +38,8 @@ include \$(PATH_TO_SHAPEAPPMK)/default/app_stage.mk
 include \$(PATH_TO_SHAPEAPPMK)/default/ports.mk
 include \$(PATH_TO_SHAPEAPPMK)/default/directories.mk
 EOF
+git add .shapeapp.mk
+git commit -m "🔨 Add .shapeapp.mk"
 
 ## Makefile
 cat <<EOF > Makefile
@@ -41,3 +47,6 @@ PATH_TO_ROOT=.
 include \$(PATH_TO_ROOT)/.shapeapp.mk
 include \$(PATH_TO_SHAPEAPPMK)/default/setup.mk
 EOF
+
+git add Makefile
+git commit -m "🔨 Add Makefile"
