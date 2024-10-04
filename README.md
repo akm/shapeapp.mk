@@ -2,6 +2,8 @@
 
 ## アプリケーションの作り方
 
+( コマンドの実行には [git-exec](https://github.com/akm/git-exec) を使うことをお勧めします )
+
 1. mkdir -p アプリケーション名
 1. cd $_
 1. git init .
