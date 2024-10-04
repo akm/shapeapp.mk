@@ -2,14 +2,15 @@ set -x
 
 APPLICATION_DIR_NAME=$(basename $PWD)
 
+if [ ! -d .git ]; then
+  echo '🚨 git repository does not exist. Run "git init ."'
+  exit 1
+fi
+
 echo "# ${APPLICATION_DIR_NAME}" > README.md 
-git init .
-git add README.md
-git commit -m "🎉 Initial commit"
 
 ## vendor/shapeappmk
 git submodule add -b ${SHAPEAPPMK_BRANCH:-main} git@github.com:akm/shapeapp.mk.git vendor/shapeappmk
-git commit -m "📦 Add vendor/shapeappmk submodule"
 
 ## .config.mk
 cat <<EOF > .config.mk
@@ -21,8 +22,6 @@ APP_FIREBASE_API_KEY?=firebase-api-key-dummy1
 CONFIG_VARS=APP_BASE_NAME APP_MYSQL_DB_NAME GOOGLE_CLOUD_PROJECT_LOCAL APP_FIREBASE_API_KEY
 CONFIG_ENVS=\$(foreach v,\$(CONFIG_VARS),\$(v)=\$(\$(v)))
 EOF
-git add .config.mk
-git commit -m "🔨 Add .config.mk"
 
 ## .shapeapp.mk
 cat <<EOF > .shapeapp.mk
@@ -32,14 +31,11 @@ PATH_TO_SHAPEAPPMK=\$(PATH_TO_ROOT)/vendor/shapeappmk
 include \$(PATH_TO_SHAPEAPPMK)/components/molecules/make/default.mk
 include \$(PATH_TO_SHAPEAPPMK)/components/atoms/asdf/reshim.mk
 include \$(PATH_TO_SHAPEAPPMK)/components/atoms/golang/tool.mk
-include \$(PATH_TO_SHAPEAPPMK)/components/atoms/git-exec-cli/base.mk
 include \$(PATH_TO_SHAPEAPPMK)/components/atoms/text-template-cli/base.mk
 include \$(PATH_TO_SHAPEAPPMK)/default/app_stage.mk
 include \$(PATH_TO_SHAPEAPPMK)/default/ports.mk
 include \$(PATH_TO_SHAPEAPPMK)/default/directories.mk
 EOF
-git add .shapeapp.mk
-git commit -m "🔨 Add .shapeapp.mk"
 
 ## Makefile
 cat <<EOF > Makefile
@@ -47,6 +43,3 @@ PATH_TO_ROOT=.
 include \$(PATH_TO_ROOT)/.shapeapp.mk
 include \$(PATH_TO_SHAPEAPPMK)/default/setup.mk
 EOF
-
-git add Makefile
-git commit -m "🔨 Add Makefile"
