@@ -9,6 +9,7 @@ include $(PATH_TO_SHAPEAPPMK)/components/atoms/git/check.mk
 include $(PATH_TO_SHAPEAPPMK)/components/atoms/sqlc/base.mk
 
 include $(PATH_TO_SHAPEAPPMK)/components/organs/biz/schema-sql.mk
+include $(PATH_TO_SHAPEAPPMK)/components/organs/biz/setup.mk
 
 .PHONY: test
 test:
