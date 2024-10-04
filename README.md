@@ -19,7 +19,13 @@
     4. [sqlcのドキュメント](https://docs.sqlc.dev/en/stable/tutorials/getting-started-mysql.html) を参考に backends/biz/queries/(テーブル名).sql を作成
     5. backends/biz/sqlc.yaml の queries をコメントアウト
     6. make -C backends/biz sqlc-generate
-
+1. backends/apisvr のセットアップ
+    1. make -C backends/apisvr setup
+    1. backends/apisvr/proto 以下にディレクトリを作成し .proto を配置
+    1. make -C backends/apisvr/proto buf-dep-update
+    1. make -C backends/apisvr/proto generate
+    1. サービスを実装
+    1. apisvr/cmd/server/main.go にサービスを組み込み
 
 ## よく使う make ターゲットの名前
 
