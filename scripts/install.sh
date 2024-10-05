@@ -12,6 +12,9 @@ echo "# ${APPLICATION_DIR_NAME}" > README.md
 ## vendor/shapeappmk
 git submodule add -b ${SHAPEAPPMK_BRANCH:-main} git@github.com:akm/shapeapp.mk.git vendor/shapeappmk
 
+## backends/applib
+git submodule add -b ${SHAPEAPP_APPLIB_BRANCH:-main} git@github.com:akm/shapeapp-applib.git backends/applib
+
 ## .config.mk
 cat <<EOF > .config.mk
 APP_BASE_NAME=${APPLICATION_DIR_NAME}
