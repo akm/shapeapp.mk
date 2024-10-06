@@ -16,7 +16,7 @@
 1. mkdir -p アプリケーション名
 1. cd $_
 1. git init .
-2. /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/akm/shapeapp.mk/refs/heads/features/application_setup_document/scripts/install.sh)"
+2. /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/akm/shapeapp.mk/refs/heads/main/scripts/install.sh)"
 3. make setup
 4. backends/dbmigrations のセットアップ
     1. make -C backends/dbmigrations setup
