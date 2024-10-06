@@ -31,6 +31,15 @@
     5. サービスを実装
     6. apisvr/cmd/server/main.go にサービスを組み込み
     7. make -C backends/apisvr build lint test
+    8. ローカルでの動作確認
+        1. make -C backends/apisvr dev-containers-up
+        2. make -C backends/dbmigrations up
+        3. make -C backends/apisvr dev
+        4. [svelte-connect-todo の test-connections.sh](https://github.com/akm/svelte-connect-todo/blob/435458e3d7895babbe355972dc5f5f62cc3a92d0/backends/apisvr/proto/test-connections.sh) を参考に backends/apisvr/proto に test-connections.sh を追加
+        5. 別のターミナルで実行
+           1. cd backends/apisvr/proto
+           2. make build
+           3. APISVR_ORIGIN=http://localhost:8080 ./test-connections.sh
 
 ## よく使う make ターゲットの名前
 
