@@ -4,4 +4,5 @@ UISVR=uisvr
 $(UISVR):
 	npm create svelte@latest $(UISVR)
 	$(TEXT_TEMPLATE_CLI) $(PATH_TO_SHAPEAPPMK)/components/organs/frontends/uisvr-templates --output-directory $(UISVR)
-	$(MAKE) -C uisvr npm-install connect-web-install
+	cd $(UISVR) && npm install
+	$(MAKE) -C $(UISVR) connect-web-install connect-node-install
