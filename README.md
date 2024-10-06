@@ -40,12 +40,21 @@
            1. cd backends/apisvr/proto
            2. make build
            3. APISVR_ORIGIN=http://localhost:8080 ./test-connections.sh
-
-## よく使う make ターゲットの名前
-
-- install-dev-deps
-- install-deps
-- build-setup
-- build
-- lint
-- test
+1. frontends/uisvr のセットアップ
+    1. make -C frontends uisvr
+        1. (npx init sveltekit@latest が実行されます)
+        2. `Skeleton project` を選択
+        3. `Yes, using TypeScript syntax` を選択
+        4. 以下をすべて選択
+            - `Add ESLint for code linting`
+            - `Add Prettier for code formatting`
+            - `Add Playwright for browser testing`
+            - `Add Vitest for unit testing`
+    2. make -C frontends/uisvr generate
+    3. frontends/uisvr/src/routes/+page.svelte 等を実装
+        - 必要に応じてライブラリをインストールしてください
+        - [SvelteKit日本語ドキュメント](https://kit.svelte.jp/)
+        - [SvelteKit公式ドキュメント](https://kit.svelte.dev/)
+    4. サーバーを起動
+        - make -C frontends/uisvr dev
+        - 表示されたURLをブラウザで開く
