@@ -2,6 +2,15 @@
 
 ## アプリケーションの作り方
 
+### 必須条件
+
+- MacOS or Linux
+    - Windows ならば WSL2 でいけるはず
+- [git](https://git-scm.com/)
+- [asdf](https://asdf-vm.com/)
+
+### 手順
+
 ( コマンドの実行には [git-exec](https://github.com/akm/git-exec) を使うことをお勧めします )
 
 1. mkdir -p アプリケーション名
