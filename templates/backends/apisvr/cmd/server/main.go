@@ -10,6 +10,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/akm/go-requestid"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 
@@ -23,6 +24,7 @@ func main() {
 		os.Exit(1)
 		return
 	}
+	slog.SetDefault(logger)
 
 	pool, err := connectDB(logger)
 	if err != nil {
@@ -54,12 +56,13 @@ func main() {
 	rootMux := http.NewServeMux()
 	rootMux.Handle("/", h2c.NewHandler(serviceMux, &http2.Server{}))
 
-	serviceMuxHandler := withCORS(rootMux)
-	serviceMuxHandler = withRequestDumping(serviceMuxHandler, logger)
+	rootMuxHandler := withCORS(rootMux)
+	rootMuxHandler = withRequestDumping(rootMuxHandler, logger)
+	rootMuxHandler = requestid.Wrap(rootMuxHandler)
 
 	srv := &http.Server{
 		Addr:              serverHostAndPort,
-		Handler:           serviceMuxHandler,
+		Handler:           rootMuxHandler,
 		ReadHeaderTimeout: time.Second,
 		ReadTimeout:       5 * time.Minute,
 		WriteTimeout:      5 * time.Minute,
@@ -82,4 +85,8 @@ func main() {
 	if err := srv.Shutdown(ctx); err != nil {
 		logger.Error("HTTP shutdown", "cause", err)
 	}
+}
+
+func init() {
+	requestid.RegisterSlogHandle("requestid")
 }

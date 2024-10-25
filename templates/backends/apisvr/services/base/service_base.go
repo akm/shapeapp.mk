@@ -9,23 +9,19 @@ import (
 	"applib/log/slog"
 
 	"connectrpc.com/connect"
+	"github.com/akm/slogwrap"
 	"github.com/bufbuild/protovalidate-go"
 	"google.golang.org/genproto/googleapis/rpc/errdetails"
 	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
 type ServiceBase struct {
-	Name   string
-	Logger slog.Logger
-	Pool   *sql.DB
+	Name string
+	Pool *sql.DB
 }
 
-func NewServiceBase(name string, logger slog.Logger, pool *sql.DB) *ServiceBase {
-	return &ServiceBase{Name: name, Logger: logger, Pool: pool}
-}
-
-func (s *ServiceBase) StartAction(ctx context.Context, method string) {
-	s.Logger.Info("StartAction", "service", s.Name, "method", method)
+func NewServiceBase(name string, pool *sql.DB) *ServiceBase {
+	return &ServiceBase{Name: name, Pool: pool}
 }
 
 func (s *ServiceBase) ValidateMsg(ctx context.Context, msg protoreflect.ProtoMessage) error {
@@ -83,7 +79,7 @@ func (s *ServiceBase) Transaction(ctx context.Context, f func(*sql.Tx) error) er
 	txErr := f(tx)
 	if txErr != nil {
 		if err := tx.Rollback(); err != nil {
-			s.Logger.Error("failed to rollback transaction", "cause", err)
+			slog.ErrorContext(ctx, "failed to rollback transaction", "cause", err)
 		}
 		return txErr
 	}
@@ -93,4 +89,30 @@ func (s *ServiceBase) Transaction(ctx context.Context, f func(*sql.Tx) error) er
 	}
 
 	return nil
+}
+
+type actionContextKeyType struct{}
+
+var actionContextKey = actionContextKeyType{}
+
+func (s *ServiceBase) Action(ctx context.Context, method string, fn func(context.Context) error) error {
+	action := fmt.Sprintf("%s.%s", s.Name, method)
+	ctx = context.WithValue(ctx, actionContextKey, action)
+	slog.InfoContext(ctx, "Start Action")
+	defer slog.InfoContext(ctx, "End Action")
+	return fn(ctx)
+}
+
+func init() {
+	slogwrap.Register(
+		func(orig slogwrap.HandleFunc) slogwrap.HandleFunc {
+			return func(ctx context.Context, rec slog.Record) error {
+				action, ok := ctx.Value(actionContextKey).(string)
+				if ok {
+					rec.Add("action", action)
+				}
+				return orig(ctx, rec)
+			}
+		},
+	)
 }
