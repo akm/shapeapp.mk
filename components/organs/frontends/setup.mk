@@ -2,7 +2,7 @@ UISVR=uisvr
 
 # https://kit.svelte.jp/docs/creating-a-project
 $(UISVR):
-	@echo "1. Run 'cd frontend && npx sv create $(UISVR)'"
+	@echo "1. Run 'cd frontends && npx sv create $(UISVR)'"
 	@echo "2. Run 'make -C frontends $(UISVR)-setup'"
 
 .PHONY: $(UISVR)-setup
