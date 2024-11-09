@@ -49,16 +49,6 @@ DOCKER_COMPOSE_ENVS=\
 	APP_UISVR_DOT_ENV=$(APP_UISVR_DOT_ENV_PATH) \
 	APP_RPROXY_ENVOY_YAML=$(APP_RPROXY_ENVOY_YAML)
 
-TARGET_SERVICES_FOR_DEV_apisvr=firebase-emulators mysql
-TARGET_SERVICES_FOR_DEV_uisvr=$(TARGET_SERVICES_FOR_DEV_apisvr) apisvr
-TARGET_SERVICES_FOR_DEV_rproxy=$(TARGET_SERVICES_FOR_DEV_uisvr) uisvr
-TARGET_SERVICES_FOR_DEV_all=$(TARGET_SERVICES_FOR_DEV_rproxy) rproxy
-DOCKER_COMPOSE_TARGET_SERVICES=$(TARGET_SERVICES_FOR_DEV_$(DEV_TARGET))
-
-ifneq "$(sort $(TARGET_SERVICES_FOR_DEV_all))" "$(sort $(DOCKER_COMPOSE_SERVICES_ALL))"
-$(error "services are invalid")
-endif
-
 # apisvr-golang-binary-build-for-stage-local
 apisvr-%:
 	$(MAKE) -C $(PATH_TO_APISVR) $*
@@ -67,11 +57,16 @@ apisvr-%:
 uisvr-%:
 	$(MAKE) -C $(PATH_TO_UISVR) $*
 
-SETUP_DEPS_FOR_DEV_apisvr=
-SETUP_DEPS_FOR_DEV_uisvr=apisvr-golang-binary-build-for-stage-local $(APP_UISVR_DOT_ENV_PATH)
-SETUP_DEPS_FOR_DEV_rproxy=$(SETUP_DEPS_FOR_DEV_uisvr) uisvr-setup $(APP_RPROXY_ENVOY_YAML)
-SETUP_DEPS_FOR_DEV_all=$(SETUP_DEPS_FOR_DEV_rproxy)
-SETUP_DEPS=$(SETUP_DEPS_FOR_DEV_$(DEV_TARGET))
+ifeq ("$(DEV_TARGET)","apisvr")
+DOCKER_COMPOSE_TARGET_SERVICES=firebase-emulators mysql uisvr rproxy
+SETUP_DEPS=$(APP_UISVR_DOT_ENV_PATH) uisvr-setup $(APP_RPROXY_ENVOY_YAML)
+else ifeq ("$(DEV_TARGET)","apisvr")
+DOCKER_COMPOSE_TARGET_SERVICES=firebase-emulators mysql apisvr rproxy
+SETUP_DEPS=apisvr-golang-binary-build-for-stage-local $(APP_UISVR_DOT_ENV_PATH) $(APP_RPROXY_ENVOY_YAML)
+else
+DOCKER_COMPOSE_TARGET_SERVICES=firebase-emulators mysql apisvr uisvr rproxy
+SETUP_DEPS=apisvr-golang-binary-build-for-stage-local $(APP_UISVR_DOT_ENV_PATH) uisvr-setup $(APP_RPROXY_ENVOY_YAML)
+endif
 
 .PHONY: setup
 setup: $(SETUP_DEPS)
