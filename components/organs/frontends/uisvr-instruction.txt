@@ -3,6 +3,18 @@
 1. frontends/uisvr/svelte.config.js に設定を追加
 
     ```
+    import adapter from '@sveltejs/adapter-auto';
+    ```
+
+    となっている箇所を以下のように変更。
+
+    ```
+    import adapter from '@sveltejs/adapter-node';
+    ```
+
+    また、以下の
+
+    ```
     adapter: adapter()
     ```
 
