@@ -19,6 +19,11 @@ setup: npm-ci
 .env: $(TEXT_TEMPLATE_CLI)
 	$(CONFIG_ENVS) $(DEFAULT_PORT_ENVS) $(TEXT_TEMPLATE_CLI) .env-template > .env
 
+# build ディレクトリを生成
+build: npm-run-build
+
+DOCKER_IMAGE_BUILD_DEPS+=build
+
 # dev-containers-up
 # dev-containers-down
 dev-containers-%:
