@@ -16,6 +16,9 @@ func TestSetup(t *testing.T) {
 	// run(t, "/bin/bash", "-c",
 	// 	`$(curl -fsSL https://raw.githubusercontent.com/akm/shapeapp.mk/refs/heads/main/scripts/install.sh)`)
 	run(t, "curl", "-fsSL", "https://raw.githubusercontent.com/akm/shapeapp.mk/refs/heads/main/scripts/install.sh", "-o", "install.sh")
+
+	// replace git@github.com:akm/shapeapp.mk.git to https://github.com/akm/shapeapp.mk.git
+	testfile.Replace(t, "install.sh", "git@github.com:akm", "https://github.com/akm")
 	run(t, "/bin/bash", "install.sh")
 	run(t, "make", "setup")
 
