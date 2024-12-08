@@ -13,13 +13,15 @@ func TestSetup(t *testing.T) {
 
 	testdir.Cd(t, testdir.MkdirAll(t, "my-app1"))
 	run(t, "git", "init")
-	run(t, "/bin/bash", "-c",
-		`$(curl -fsSL https://raw.githubusercontent.com/akm/shapeapp.mk/refs/heads/main/scripts/install.sh)`)
+	// run(t, "/bin/bash", "-c",
+	// 	`$(curl -fsSL https://raw.githubusercontent.com/akm/shapeapp.mk/refs/heads/main/scripts/install.sh)`)
+	run(t, "curl", "-fsSL", "https://raw.githubusercontent.com/akm/shapeapp.mk/refs/heads/main/scripts/install.sh", "-o", "install.sh")
+	run(t, "/bin/bash", "install.sh")
 	run(t, "make", "setup")
 
 	// Setup dbmigrations
 	run(t, "make", "-C", "backends/dbmigrations", "setup")
-	testfile.Copy(t, "20240715145233_create_tasks.sql", "my-app1/backends/dbmigrations/migrations")
+	testfile.Copy(t, "../20240715145233_create_tasks.sql", "./backends/dbmigrations/20240715145233_create_tasks.sql")
 	run(t, "make", "-C", "backends/dbmigrations") // Run build, lint, test
 
 	teardown()
