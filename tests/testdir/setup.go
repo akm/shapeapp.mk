@@ -1,11 +1,12 @@
 package testdir
 
 import (
-	"io"
 	"io/fs"
 	"os"
 	"path/filepath"
 	"testing"
+
+	"github.com/akm/shapeapp.mk/tests/testfile"
 )
 
 func Setup(t testing.TB, srcDir, destDir string) func() {
@@ -88,20 +89,5 @@ func copyEntry(t testing.TB, src string, dest string, entry fs.DirEntry) {
 	}
 
 	t.Logf("copyEntry: %s -> %s\n", srcPath, destPath)
-
-	reader, err := os.Open(srcPath)
-	if err != nil {
-		t.Fatalf("Failed to open source file: %v", err)
-	}
-	defer reader.Close()
-
-	writer, err := os.Create(destPath)
-	if err != nil {
-		t.Fatalf("Failed to create destination file: %v", err)
-	}
-	defer writer.Close()
-
-	if _, err := io.Copy(writer, reader); err != nil {
-		t.Fatalf("Failed to copy file: %v", err)
-	}
+	testfile.Copy(t, srcPath, destPath)
 }

@@ -3,7 +3,7 @@ package testground
 import (
 	"testing"
 
-	"github.com/akm/git-exec/testexec"
+	"github.com/akm/shapeapp.mk/tests/testexec"
 )
 
 func GitLastCommitHash(t *testing.T) string {

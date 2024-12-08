@@ -4,8 +4,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/akm/git-exec/testdir"
-	"github.com/akm/git-exec/testexec"
+	"github.com/akm/shapeapp.mk/tests/testdir"
+	"github.com/akm/shapeapp.mk/tests/testexec"
 )
 
 func Setup(t *testing.T) func() {
