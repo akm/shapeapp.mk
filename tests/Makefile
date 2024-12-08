@@ -6,8 +6,12 @@ build:
 	go build -o /dev/null ./...
 
 .PHONY: test
-test:
+test: clobber_test_grounds
 	go test -v ./...
+
+.PHONY: clobber_test_grounds
+clobber_test_grounds:
+	rm -rf grounds/01_basic
 
 GOLANGCI_LINT_VERSION=v1.61.0
 GOLANGCI_LINT = $(shell go env GOPATH)/bin/golangci-lint
