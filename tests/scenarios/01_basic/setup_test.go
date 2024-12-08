@@ -9,7 +9,7 @@ import (
 )
 
 func TestSetup(t *testing.T) {
-	defer testground.Setup(t)()
+	teardown := testground.Setup(t)
 
 	testdir.Cd(t, testdir.MkdirAll(t, "my-app1"))
 	run(t, "git", "init")
@@ -21,4 +21,6 @@ func TestSetup(t *testing.T) {
 	run(t, "make", "-C", "backends/dbmigrations", "setup")
 	testfile.Copy(t, "20240715145233_create_tasks.sql", "my-app1/backends/dbmigrations/migrations")
 	run(t, "make", "-C", "backends/dbmigrations") // Run build, lint, test
+
+	teardown()
 }
