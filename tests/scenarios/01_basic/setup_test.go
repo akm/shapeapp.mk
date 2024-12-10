@@ -1,6 +1,7 @@
 package basic
 
 import (
+	"os"
 	"testing"
 
 	"github.com/akm/shapeapp.mk/tests/testdir"
@@ -27,5 +28,7 @@ func TestSetup(t *testing.T) {
 	testfile.Copy(t, "../20240715145233_create_tasks.sql", "./backends/dbmigrations/20240715145233_create_tasks.sql")
 	run(t, "make", "-C", "backends/dbmigrations") // Run build, lint, test
 
-	teardown()
+	if os.Getenv("GITHUB_ACTIONS") != "true" {
+		teardown()
+	}
 }
