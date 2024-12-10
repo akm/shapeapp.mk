@@ -28,6 +28,14 @@ func TestSetup(t *testing.T) {
 	testfile.Copy(t, "../20240715145233_create_tasks.sql", "./backends/dbmigrations/20240715145233_create_tasks.sql")
 	run(t, "make", "-C", "backends/dbmigrations") // Run build, lint, test
 
+	// backends/biz
+	run(t, "make", "-C", "backends/biz", "setup")
+	run(t, "make", "-C", "backends/biz", "dump-schema-sql")
+	testdir.MkdirAll(t, "backends/biz/queries")
+	testfile.Copy(t, "../tasks.sql", "./backends/biz/queries/tasks.sql")
+	testfile.Copy(t, "../sqlc.yaml", "./backends/biz/sqlc.yaml")
+	run(t, "make", "-C", "backends/biz", "sqlc-generate")
+
 	if os.Getenv("GITHUB_ACTIONS") != "true" {
 		teardown()
 	}
