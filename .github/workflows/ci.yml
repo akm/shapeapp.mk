@@ -16,6 +16,9 @@ jobs:
     env:
       SHAPEAPPMK_BRANCH: ${{ github.ref_name }}
     steps:
+      - name: Show environment variables
+        run: export
+
       # https://github.com/actions/checkout
       - uses: actions/checkout@v4
         with:
