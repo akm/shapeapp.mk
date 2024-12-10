@@ -5,8 +5,10 @@ SETUP_GOLANG_VERSION=$(shell cat $(PATH_TO_SHAPEAPPMK)/templates/.tool-versions 
 
 .PHONY: setup-golang
 setup-golang:
+ifndef GITHUB_ACTIONS
 	asdf install golang $(SETUP_GOLANG_VERSION)
 	asdf local golang $(SETUP_GOLANG_VERSION)
+endif
 	$(MAKE) $(TEXT_TEMPLATE_CLI) 
 
 .PHONY: setup
