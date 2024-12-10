@@ -53,9 +53,15 @@ jobs:
         run: make test
         working-directory: ./tests
 
+      - name: list result files
+        if: ${{ always() }}
+        run: find tests/grounds
+
       - name: Upload test results
         uses: actions/upload-artifact@v4
         if: ${{ always() }}
         with:
           name: test-result-with-go-${{ matrix.go }}
-          path: tests/grounds/**/*
+          include-hidden-files: true
+          path: |
+            tests/grounds/
