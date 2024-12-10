@@ -47,3 +47,8 @@ jobs:
       - name: test
         run: make test
         working-directory: ./tests
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: test-result
+          path: tests/grounds
