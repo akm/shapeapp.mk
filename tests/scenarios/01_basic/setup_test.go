@@ -36,6 +36,12 @@ func TestSetup(t *testing.T) {
 	testfile.Copy(t, "../sqlc.yaml", "./backends/biz/sqlc.yaml")
 	run(t, "make", "-C", "backends/biz", "sqlc-generate")
 
+	// backends/applib
+	run(t, "make", "-C", "backends/applib")
+
+	// backends/apisvr
+	run(t, "make", "-C", "backends/apisvr", "setup")
+
 	if os.Getenv("GITHUB_ACTIONS") != "true" {
 		teardown()
 	}
