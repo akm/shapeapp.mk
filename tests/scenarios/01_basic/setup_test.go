@@ -46,9 +46,16 @@ func TestSetup(t *testing.T) {
 	run(t, "make", "-C", "backends/apisvr/proto", "buf-dep-update")
 	run(t, "make", "-C", "backends/apisvr/proto", "generate")
 	testdir.MkdirAll(t, "backends/apisvr/services/task_service")
-	testfile.Copy(t, "../task_service/task_service.go", "./backends/apisvr/services/task_service/task_service.go")
-	testfile.Copy(t, "../cmd/server/main.go", "./backends/apisvr/cmd/server/main.go")
-	run(t, "make", "-C", "backends/apisvr", "build", "lint", "test")
+	testfile.Copy(t, "../task_service/task_service-go", "./backends/apisvr/services/task_service/task_service.go")
+	// testfile.Copy(t, "../task_service/task_service_test-go", "./backends/apisvr/services/task_service/task_service_test.go")
+	testfile.Copy(t, "../cmd/server/main-go", "./backends/apisvr/cmd/server/main.go")
+
+	testdir.Cd(t, "backends/apisvr")
+	run(t, "go", "get", "applib")
+	run(t, "go", "get", "biz")
+	run(t, "go", "get", "connectrpc.com/authn@v0.1.0")
+	run(t, "go", "mod", "tidy")
+	run(t, "make", "build", "lint", "test")
 
 	if os.Getenv("GITHUB_ACTIONS") != "true" {
 		teardown()
