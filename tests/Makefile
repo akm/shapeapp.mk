@@ -5,9 +5,11 @@ default: build lint test
 build:
 	go build -o /dev/null ./...
 
+CURRENT_BRANCH=$(shell git branch --show-current)
+
 .PHONY: test
 test: clobber_test_grounds
-	go test -v ./...
+	SHAPEAPPMK_BRANCH=$(CURRENT_BRANCH) go test -v ./...
 
 .PHONY: clobber_test_grounds
 clobber_test_grounds:
