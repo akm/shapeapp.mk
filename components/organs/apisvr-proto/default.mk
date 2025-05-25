@@ -7,6 +7,7 @@ include $(PATH_TO_SHAPEAPPMK)/components/atoms/connect-go/protoc-gen-connect-go.
 .PHONY: install-tools
 install-tools:
 	$(MAKE) $(BUF_CLI)
+	$(MAKE) $(GRPCURL_CLI)
 	$(MAKE) $(PROTOC_GEN_GO_CLI)
 	$(MAKE) $(PROTOC_GEN_CONNECT_GO_CLI)
 
