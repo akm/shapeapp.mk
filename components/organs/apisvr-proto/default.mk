@@ -4,6 +4,9 @@ include $(PATH_TO_SHAPEAPPMK)/components/atoms/buf/proto/base.mk
 include $(PATH_TO_SHAPEAPPMK)/components/atoms/protobuf/protoc-gen-go.mk
 include $(PATH_TO_SHAPEAPPMK)/components/atoms/connect-go/protoc-gen-connect-go.mk
 
+.PHONY: install-tools
+install-tools: $(BUF_CLI) $(GRPCURL_CLI) $(PROTOC_GEN_GO_CLI) $(PROTOC_GEN_CONNECT_GO_CLI)
+
 .PHONY: build
 build: $(PROTOC_GEN_CONNECT_GO_CLI) $(PROTOC_GEN_GO_CLI) buf-build
 
