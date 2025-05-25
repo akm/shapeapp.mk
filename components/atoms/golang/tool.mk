@@ -5,7 +5,13 @@
 # - golang-tool-bin-path
 # - golang-tool-cli-install-with-prefix
 
-GOLANG_TOOL_PATH_TO_BIN=$(shell go env GOBIN)
+GOLANG_TOOL_GOBIN=$(shell go env GOBIN)
+GOLANG_TOOL_GOPATH=$(shell go env GOPATH)
+ifndef ($(GOLANG_TOOL_GOBIN),)
+GOLANG_TOOL_PATH_TO_BIN=$(GOLANG_TOOL_GOBIN)
+else
+GOLANG_TOOL_PATH_TO_BIN=$(GOLANG_TOOL_GOPATH)/bin
+endif
 
 # arguments:
 # $(1): golang module name
