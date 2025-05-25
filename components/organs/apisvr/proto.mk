@@ -2,4 +2,4 @@ APISVR_PROTO_DIR_NAME=proto
 PATH_TO_APISVR_PROTO=$(PATH_TO_APISVR)/$(APISVR_PROTO_DIR_NAME)
 
 $(APISVR_PROTO_DIR_NAME):
-	cp -r $(PATH_TO_SHAPEAPPMK)/templates/backends/apisvr/proto $(APISVR_PROTO_DIR_NAME)
+	$(TEXT_TEMPLATE_CLI) $(PATH_TO_SHAPEAPPMK)/templates/backends/apisvr/proto --output-directory $(APISVR_PROTO_DIR_NAME)
