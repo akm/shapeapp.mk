@@ -50,28 +50,3 @@ state: goose-state
 .PHONY: reset
 reset: goose-reset
 
-DBMIGRATIONS_TEST_PATH_TO_CONTAINERS=$(PATH_TO_BACKENDS)/test/containers
-
-# TEST_CONTAINERS-mysql-dsn-from-outside
-$(call shell-dir-target-vars,$(DBMIGRATIONS_TEST_PATH_TO_CONTAINERS),TEST_CONTAINERS-,mysql-dsn-from-outside)
-
-.PHONY: test-containers-up
-test-containers-up:
-	DOCKER_COMPOSE_TARGET_SERVICES=mysql \
-		$(MAKE) -C $(DBMIGRATIONS_TEST_PATH_TO_CONTAINERS) up
-
-.PHONY: test-containers-down
-test-containers-down:
-	$(MAKE) -C $(DBMIGRATIONS_TEST_PATH_TO_CONTAINERS) down
-
-# test-containers-up で dbmigrations の make up が実行されるので
-# test-run では すべての down を実行する reset を実行する
-.PHONY: test-run
-test-run:
-	$(MAKE) reset GOOSE_DSN='$(TEST_CONTAINERS-mysql-dsn-from-outside)'
-
-.PHONY: test
-test: test-containers-down test-containers-up test-run
-
-.PHONY: ci-test
-ci-test: test-containers-up test-run
