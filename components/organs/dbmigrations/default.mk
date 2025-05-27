@@ -44,6 +44,9 @@ up: goose-up
 .PHONY: down
 down: goose-down
 
+.PHONY: down-to-zero
+down-to-zero: goose-down-to-zero
+
 .PHONY: state
 state: goose-state
 
