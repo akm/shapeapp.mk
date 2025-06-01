@@ -11,7 +11,7 @@
 # - DOCKER_IMAGE_NAME
 
 .PHONY: install
-install: npm-install connect-web-install
+install: npm-install connect-web-install connect-node-install
 
 .PHONY: setup
 setup: npm-ci
