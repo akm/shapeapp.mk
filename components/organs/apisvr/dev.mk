@@ -36,7 +36,7 @@ APISVR_DEV_ENVS?=$(APISVR_ENVS_BASE) \
 
 .PHONY: dev-containers-up
 dev-containers-up:
-	DEV_TARGET=apisvr $(MAKE) -C $(APISVR_DEV_PATH_TO_CONTAINERS) up
+	DEV_TARGET=apisvr $(MAKE) -C $(APISVR_DEV_PATH_TO_CONTAINERS) upd
 
 .PHONY: dev-containers-down
 dev-containers-down:
