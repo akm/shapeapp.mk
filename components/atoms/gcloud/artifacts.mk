@@ -40,3 +40,9 @@ gcloud-artifacts-repository-down:
 	( $(GCLOUD_ARTIFACTS_REPOSITORIES) list --format json --location=$(GOOGLE_CLOUD_REGION) | grep $(REPOSITORY_NAME) ) && \
 	$(MAKE) gcloud-artifacts-repository-delete || \
 	echo "Repository $(REPOSITORY_NAME) is already down or does not exist."
+
+GCLOUD_ARTIFACTS_REPOSITORY_DOMAIN=$(GOOGLE_CLOUD_REGION)-$(REPOSITORY_FORMAT).pkg.dev
+GCLOUD_ARTIFACTS_REPOSITORY_PATH=$(GCLOUD_ARTIFACTS_REPOSITORY_DOMAIN)/$(GOOGLE_CLOUD_PROJECT)/$(REPOSITORY_NAME)
+.PHONY: gcloud-artifacts-repository-path
+gcloud-artifacts-repository-path:
+	@echo $(GCLOUD_ARTIFACTS_REPOSITORY_PATH)
