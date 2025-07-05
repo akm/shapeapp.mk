@@ -5,14 +5,14 @@ BUF_YAML=buf.yaml
 $(BUF_YAML):
 	$(MAKE) buf-yaml-gen
 .PHONY: buf-yaml-gen
-buf-yaml-gen: $(BUF_CLI)
+buf-yaml-gen: $(BUF_CLI) $(BUF_YAML_GEN_DEPS)
 	$(BUF_CLI) config init
 
 .PHONY: buf-setup
 buf-setup: $(BUF_YAML)
 
 .PHONY: buf-generate
-buf-generate: $(BUF_YAML) $(BUF_CLI)
+buf-generate: $(BUF_YAML) $(BUF_CLI) $(BUF_GENERATE_DEPS)
 	$(BUF_CLI) generate
 
 .PHONY: buf-lint
@@ -27,13 +27,13 @@ buf-protoset-path:
 	@echo $(BUF_PROTOSET_BIN)
 
 .PHONY: buf-build
-buf-build: $(BUF_CLI) $(BUF_YAML)
+buf-build: $(BUF_CLI) $(BUF_YAML) $(BUF_BUILD_DEPS)
 	$(BUF_CLI) build -o $(BUF_PROTOSET_BIN)
 
 .PHONY: buf-mod-update
-buf-mod-update: $(BUF_CLI) $(BUF_YAML)
+buf-mod-update: $(BUF_CLI) $(BUF_YAML) $(BUF_MOD_UPDATE_DEPS)
 	$(BUF_CLI) mod update
 
 .PHONY: buf-dep-update
-buf-dep-update: $(BUF_CLI) $(BUF_YAML)
+buf-dep-update: $(BUF_CLI) $(BUF_YAML) $(BUF_DEP_UPDATE_DEPS)
 	$(BUF_CLI) dep update
