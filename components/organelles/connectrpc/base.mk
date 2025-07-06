@@ -4,18 +4,18 @@ include $(PATH_TO_SHAPEAPPMK)/components/atoms/connect-go/protoc-gen-connect-go.
 include $(PATH_TO_SHAPEAPPMK)/components/atoms/grpcurl/base.mk
 include $(PATH_TO_SHAPEAPPMK)/components/atoms/protobuf/protoc-gen-go.mk
 
-.PHONY: install-tools
-install-tools:
+.PHONY: connectrpc-install-tools
+connectrpc-install-tools:
 	$(MAKE) $(BUF_CLI)
 	$(MAKE) $(GRPCURL_CLI)
 	$(MAKE) $(PROTOC_GEN_GO_CLI)
 	$(MAKE) $(PROTOC_GEN_CONNECT_GO_CLI)
 
-.PHONY: build
-build: $(PROTOC_GEN_CONNECT_GO_CLI) $(PROTOC_GEN_GO_CLI) buf-build
+.PHONY: connectrpc-build
+connectrpc-build: $(PROTOC_GEN_CONNECT_GO_CLI) $(PROTOC_GEN_GO_CLI) buf-build
 
-.PHONY: lint
-lint: buf-lint
+.PHONY: connectrpc-lint
+connectrpc-lint: buf-lint
 
-.PHONY: generate
-generate: $(PROTOC_GEN_CONNECT_GO_CLI) $(PROTOC_GEN_GO_CLI) buf-generate
+.PHONY: connectrpc-generate
+connectrpc-generate: $(PROTOC_GEN_CONNECT_GO_CLI) $(PROTOC_GEN_GO_CLI) buf-generate
