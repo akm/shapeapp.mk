@@ -5,7 +5,7 @@ PATH_TO_ROOT=..
 include $(PATH_TO_ROOT)/.shapeapp.mk
 include $(PATH_TO_SHAPEAPPMK)/components/atoms/make/eachdir.mk
 
-DIRS=applib dbmigrations biz apisvr apisvr/proto
+DIRS=applib dbmigrations biz apisvr
 
 .PHONY: build
 build:

@@ -40,7 +40,7 @@ include $(PATH_TO_SHAPEAPPMK)/components/atoms/sveltekit/npm.mk
 include $(PATH_TO_SHAPEAPPMK)/components/atoms/sveltekit/app.mk
 
 include $(PATH_TO_SHAPEAPPMK)/components/atoms/connect-web/install.mk
-CONNECT_WEB_PATH_TO_PROTO=$(PATH_TO_APISVR)/proto
+CONNECT_WEB_PATH_TO_PROTO=$(PATH_TO_PROTO)
 include $(PATH_TO_SHAPEAPPMK)/components/atoms/connect-web/generate.mk
 
 include $(PATH_TO_SHAPEAPPMK)/components/atoms/connect-node/install.mk

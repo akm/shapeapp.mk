@@ -10,7 +10,7 @@
 
 include $(PATH_TO_SHAPEAPPMK)/components/atoms/buf/buf.mk
 
-BUF_APP_GEN_PATH_TO_PROTO?=./proto
+BUF_APP_GEN_PATH_TO_PROTO?=$(PATH_TO_PROTO)
 
 .PHONY: buf-generate
 buf-generate:
