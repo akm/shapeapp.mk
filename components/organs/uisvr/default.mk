@@ -45,9 +45,6 @@ include $(PATH_TO_SHAPEAPPMK)/components/atoms/connect-web/generate.mk
 
 include $(PATH_TO_SHAPEAPPMK)/components/atoms/connect-node/install.mk
 
-.PHONY: generate
-generate: connect-web-generate npm-run-format
-
 DOCKER_IMAGE_REPOSITORY?=$(APP_BASE_NAME)-uisvr
 DOCKER_IMAGE_NAME?=$(DOCKER_IMAGE_REPOSITORY):$(APP_STAGE_TYPE)
 include $(PATH_TO_SHAPEAPPMK)/components/atoms/docker/image.mk
