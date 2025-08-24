@@ -11,6 +11,13 @@ connectrpc-install-tools:
 	$(MAKE) $(PROTOC_GEN_GO_CLI)
 	$(MAKE) $(PROTOC_GEN_CONNECT_GO_CLI)
 
+.PHONY: connectrpc-update-tools
+connectrpc-update-tools: \
+	buf-cli-install \
+	grpcurl-cli-install \
+	protoc-gen-go-cli-install \
+	protoc-gen-connect-go-cli-install
+
 .PHONY: connectrpc-build
 connectrpc-build: $(PROTOC_GEN_CONNECT_GO_CLI) $(PROTOC_GEN_GO_CLI) buf-build
 
