@@ -18,3 +18,6 @@ build: golang-build-all
 include $(PATH_TO_SHAPEAPPMK)/components/atoms/golangci-lint/lint.mk
 .PHONY: lint
 lint: golangci-lint-lint
+
+.PHONY: golang-module-update
+golang-module-update: golang_get_update golang_mod_tidy
