@@ -27,7 +27,7 @@ DOCKER_IMAGE_BUILD_DEPS+=build
 # dev-containers-up
 # dev-containers-down
 dev-containers-%:
-	DEV_TARGET=uisvr $(MAKE) -C $(PATH_TO_ROOT)/stages/localdev $*
+	$(MAKE) -C $(PATH_TO_ROOT)/stages/localdev $*
 
 .PHONY: dev-run
 dev-run: setup .env npm-run-dev
