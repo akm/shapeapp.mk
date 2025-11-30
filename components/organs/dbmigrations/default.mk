@@ -20,12 +20,12 @@ new:
 	GOOSE_MIGRATION_NAME=$(NEW_ARGS) $(MAKE) goose-create
 
 ifeq (new-go,$(firstword $(MAKECMDGOALS)))
-  CREATE_GO_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
-  $(eval $(CREATE_GO_ARGS):;@:)
+  NEW_GO_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+  $(eval $(NEW_GO_ARGS):;@:)
 endif
 .PHONY: new-go
 new-go:
-	GOOSE_MIGRATION_NAME=$(NEW_ARGS) $(MAKE) goose-create-go
+	GOOSE_MIGRATION_NAME=$(NEW_GO_ARGS) $(MAKE) goose-create-go
 
 .PHONY: up
 up: goose-up
