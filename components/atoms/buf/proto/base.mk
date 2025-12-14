@@ -1,7 +1,7 @@
 # Requires:
 # include $(PATH_TO_SHAPEAPPMK)/components/atoms/buf/buf.mk
 
-BUF_YAML=buf.yaml
+BUF_YAML?=buf.yaml
 $(BUF_YAML):
 	$(MAKE) buf-yaml-gen
 .PHONY: buf-yaml-gen
@@ -16,7 +16,7 @@ buf-generate: $(BUF_YAML) $(BUF_CLI) $(BUF_GENERATE_DEPS)
 	$(BUF_CLI) generate
 
 .PHONY: buf-lint
-buf-lint: $(BUF_CLI) 
+buf-lint: $(BUF_CLI)
 	$(BUF_CLI) lint
 
 BUF_PROTOSET_BIN?=protoset.bin
