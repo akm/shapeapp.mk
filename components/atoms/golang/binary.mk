@@ -15,6 +15,9 @@ GOLANG_BINARY_OUTPUT_BASE?=$(GOLANG_BINARY_OUTPUT_DIR)/$(notdir $(GOLANG_BINARY_
 
 golang-binary-word-hyphen = $(word $2,$(subst -, ,$1))
 
+golang-binary-clean:
+	rm -f $(GOLANG_BINARY_OUTPUT_BASE)-*
+
 $(GOLANG_BINARY_OUTPUT_BASE)-%:
 	$(MAKE) golang-binary-$*
 

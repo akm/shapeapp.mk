@@ -14,5 +14,8 @@ preview: npm-run-preview
 .PHONY: test
 test: npm-run-test
 
+.PHONY: check
+check: npm-run-check
+
 .PHONY: lint
 lint: npm-run-lint

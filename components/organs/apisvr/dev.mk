@@ -8,7 +8,6 @@
 #   - APISVR_ENVS_BASE
 #
 # Defined variables:
-#   - DEV_TARGET
 #   - APISVR_DEV_VARS
 #   - APISVR_DEV_ENVS
 #
@@ -18,8 +17,6 @@
 #   - dev-run
 #   - run
 #   - dev
-
-DEV_TARGET?=apisvr
 
 APISVR_DEV_TARGET_PACKAGE?=./cmd/server
 APISVR_DEV_PATH_TO_CONTAINERS?=$(PATH_TO_ROOT)/stages/localdev
@@ -36,11 +33,11 @@ APISVR_DEV_ENVS?=$(APISVR_ENVS_BASE) \
 
 .PHONY: dev-containers-up
 dev-containers-up:
-	DEV_TARGET=apisvr $(MAKE) -C $(APISVR_DEV_PATH_TO_CONTAINERS) up
+	$(MAKE) -C $(APISVR_DEV_PATH_TO_CONTAINERS) upd
 
 .PHONY: dev-containers-down
 dev-containers-down:
-	DEV_TARGET=apisvr $(MAKE) -C $(APISVR_DEV_PATH_TO_CONTAINERS) down
+	$(MAKE) -C $(APISVR_DEV_PATH_TO_CONTAINERS) down
 
 .PHONY: dev-run
 dev-run:

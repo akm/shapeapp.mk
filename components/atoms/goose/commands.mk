@@ -1,4 +1,8 @@
-GOOSE_COMMAND=$(GOOSE_ENVS) go run $(GOOSE_MAIN_PACKAGE) '$(GOOSE_DSN)'
+# Required variables:
+# - GOOSE_MAIN_PACKAGE
+# - GOOSE_DSN
+
+GOOSE_COMMAND=go run $(GOOSE_MAIN_PACKAGE) '$(GOOSE_DSN)'
 
 .PHONY: goose-create
 goose-create:
@@ -15,6 +19,10 @@ goose-up:
 .PHONY: goose-down
 goose-down:
 	$(GOOSE_COMMAND) down
+
+.PHONY: goose-down-to-zero
+goose-down-to-zero:
+	$(GOOSE_COMMAND) down-to 0
 
 .PHONY: goose-state
 goose-state:
