@@ -5,6 +5,9 @@ DOCKER_COMPOSE_OPTS?=-f $(DOCKER_COMPOSE_YAML_PATH)
 
 DOCKER_COMPOSE_TARGET_SERVICES?=
 
+DOCKER_COMPOSE_BUILD_OPTS?=--progress auto
+# DOCKER_COMPOSE_BUILD_OPTS?=--progress plain
+# DOCKER_COMPOSE_BUILD_OPTS?=--progress tty
 .PHONY: docker-compose-build
 docker-compose-build: $(DOCKER_COMPOSE_BUILD_DEPS)
 	$(DOCKER_COMPOSE_ENVS) docker compose $(DOCKER_COMPOSE_OPTS) $(DOCKER_COMPOSE_BUILD_OPTS) build $(DOCKER_COMPOSE_TARGET_SERVICES)
@@ -26,13 +29,6 @@ docker-compose-up-%: $(DOCKER_COMPOSE_UP_DEPS)
 
 docker-compose-upd-%: $(DOCKER_COMPOSE_UPD_DEPS)
 	$(DOCKER_COMPOSE_ENVS) docker compose $(DOCKER_COMPOSE_OPTS) up -d --wait $(subst -, ,$*)
-
-DOCKER_COMPOSE_BUILD_OPTS?=--progress auto
-# DOCKER_COMPOSE_BUILD_OPTS?=--progress plain
-# DOCKER_COMPOSE_BUILD_OPTS?=--progress tty
-.PHONY: docker-compose-build
-docker-compose-build: $(DOCKER_COMPOSE_BUILD_DEPS)
-	$(DOCKER_COMPOSE_ENVS) docker compose build $(DOCKER_COMPOSE_BUILD_OPTS)
 
 .PHONY: docker-compose-rmi
 docker-compose-rmi: docker-compose-down
