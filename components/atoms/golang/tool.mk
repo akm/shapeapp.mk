@@ -36,3 +36,12 @@ define golang-tool-cli-install-with-prefix
 	CLI_MODULE=$($(1)_CLI_MODULE) \
 	$(MAKE) -C $(PATH_TO_SHAPEAPPMK)/components/atoms/golang/tool cli-install
 endef
+
+.PHONY: golang-tool-cli-uninstall
+golang-tool-cli-uninstall:
+ifdef CLI_MODULE
+	rm -f $(GOLANG_TOOL_PATH_TO_BIN)/$(CLI_MODULE)
+else
+	@echo "ERROR: CLI_MODULE is not defined"
+	exit 1
+endif
