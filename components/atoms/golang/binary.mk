@@ -1,4 +1,4 @@
-# Required variables: 
+# Required variables:
 # GOLANG_BINARY_TARGET: ex. ./cmd/server
 #
 # Optional variables:
@@ -9,6 +9,7 @@
 # GOLANG_BINARY_GOOS_FOR_production: default linux
 # GOLANG_BINARY_GOARCH_FOR_production: default amd64
 
+GOLANG_BINARY_BUILD_OPTS?=-ldflags="-s -w" -trimpath
 GOLANG_BINARY_TARGET?=./cmd/server
 GOLANG_BINARY_OUTPUT_DIR?=./bin
 GOLANG_BINARY_OUTPUT_BASE?=$(GOLANG_BINARY_OUTPUT_DIR)/$(notdir $(GOLANG_BINARY_TARGET))
@@ -29,7 +30,7 @@ golang-binary-%:
 	CGO_ENABLED=0 \
 	GOOS=$(call golang-binary-word-hyphen,$*,1) \
 	GOARCH=$(call golang-binary-word-hyphen,$*,2) \
-		go build -o $(GOLANG_BINARY_OUTPUT_BASE)-$* $(GOLANG_BINARY_TARGET)
+		go build $(GOLANG_BINARY_BUILD_OPTS) -o $(GOLANG_BINARY_OUTPUT_BASE)-$* $(GOLANG_BINARY_TARGET)
 
 GOLANG_BINARY_OUTPUT_dev=$(GOLANG_BINARY_OUTPUT_BASE)-dev
 .PHONY: golang-binary-dev
